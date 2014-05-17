@@ -10,5 +10,10 @@
         <TextBlock
             TextWrapping="Wrap"
             Text="{Binding Test}" />
+        <ListBox Height="100" ItemsSource="{Binding Customers}"/>
+        <Frame
+            x:Name="MainFrame"
+            x:FieldModifier="public"
+            Source="./Views/CustomerView.xaml"/>
     </StackPanel>
 </Window>
