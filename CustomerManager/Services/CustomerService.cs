@@ -26,8 +26,26 @@
                 Birthday = new DateTime(year: 1988, month: 9, day: 24),
             };
 
+            var fred = new CustomerDTO
+            {
+                Id = 3,
+                FirstName = "Fred",
+                LastName = "Flinstone",
+                Birthday = new DateTime(year: 100, month: 3, day: 12)
+            };
+
+            var wilma = new CustomerDTO
+            {
+                Id = 3,
+                FirstName = "Wilma",
+                LastName = "Flinstone",
+                Birthday = new DateTime(year: 102, month: 4, day: 18)
+            };
+
             list.Add(josh);
             list.Add(brandy);
+            list.Add(fred);
+            list.Add(wilma);
 
             return list;
         }

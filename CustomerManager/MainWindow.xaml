@@ -5,15 +5,11 @@
     Title="MainWindow"
     Height="350"
     Width="525"
-    DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <StackPanel>
-        <TextBlock
-            TextWrapping="Wrap"
-            Text="{Binding Test}" />
-        <ListBox Height="100" ItemsSource="{Binding Customers}"/>
+    DataContext="{Binding MainVM, Source={StaticResource Locator}}">
+    <Grid>
         <Frame
             x:Name="MainFrame"
             x:FieldModifier="public"
-            Source="./Views/CustomerView.xaml"/>
-    </StackPanel>
+            Source="./Views/CustomerList.xaml" />
+    </Grid>
 </Window>

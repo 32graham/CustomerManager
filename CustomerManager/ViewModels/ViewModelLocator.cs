@@ -27,14 +27,23 @@ namespace CustomerManager.ViewModel
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<ICustomerService, CustomerService>();
             SimpleIoc.Default.Register<MainVM>();
+            SimpleIoc.Default.Register<CustomerListVM>();
             
         }
 
-        public MainVM Main
+        public MainVM MainVM
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<MainVM>();
+            }
+        }
+
+        public CustomerListVM CustomerListVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CustomerListVM>();
             }
         }
 

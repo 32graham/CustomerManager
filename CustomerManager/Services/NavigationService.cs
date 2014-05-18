@@ -1,32 +1,21 @@
 ﻿namespace CustomerManager.Services
 {
-    using System;
     using System.Windows;
 
     public class NavigationService : INavigationService
     {
-        private System.Windows.Controls.Frame frame;
-
-        public NavigationService()
-        {
-            this.frame = (Application.Current.MainWindow as CustomerManager.MainWindow).MainFrame;
-        }
-
         public void GoBack()
         {
+            var frame = (Application.Current.MainWindow as CustomerManager.MainWindow).MainFrame;
+
             frame.GoBack();
         }
 
-        public void NavigateTo(Uri uri, object state = null)
+        public void NavigateTo(object destination)
         {
-            if (state == null)
-            {
-                frame.Navigate(uri);
-            }
-            else
-            {
-                frame.Navigate(uri, state);
-            }
+            var frame = (Application.Current.MainWindow as CustomerManager.MainWindow).MainFrame;
+
+            frame.Navigate(destination);
         }
     }
 }

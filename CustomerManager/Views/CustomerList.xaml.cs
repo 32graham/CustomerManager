@@ -16,19 +16,18 @@ using System.Windows.Shapes;
 namespace CustomerManager.Views
 {
     /// <summary>
-    /// Interaction logic for Test.xaml
+    /// Interaction logic for CustomerList.xaml
     /// </summary>
-    public partial class Test : Page
+    public partial class CustomerList : Page
     {
-        public Test()
+        public CustomerList()
         {
             InitializeComponent();
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            var uri = new Uri("./Views/CustomerView.xaml", UriKind.Relative);
-            this.NavigationService.Navigate(uri, "state passed from Test.xaml");
+
         }
     }
 }
