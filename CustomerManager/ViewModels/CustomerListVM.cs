@@ -15,7 +15,6 @@
         private ICustomerService customerService;
         private INavigationService navigationService;
         private List<CustomerVM> customers;
-        private CustomerVM selectedCustomer;
 
         public CustomerListVM(ICustomerService customerService, INavigationService navigationService)
         {
@@ -35,7 +34,7 @@
                 this.customers.Add(vm);
             }
 
-            this.ViewDetailCommand = new RelayCommand(this.ViewDetail);
+            this.ViewDetailCommand = new RelayCommand<CustomerVM>(this.ViewDetail);
         }
 
         public ICommand ViewDetailCommand { get; private set; }
@@ -53,23 +52,10 @@
             }
         }
 
-        public CustomerVM SelectedCustomer
-        {
-            get
-            {
-                return this.selectedCustomer;
-            }
-
-            set
-            {
-                this.Set(() => this.SelectedCustomer, ref this.selectedCustomer, value);
-            }
-        }
-
-        private void ViewDetail()
+        private void ViewDetail(CustomerVM customer)
         {
             var view = new CustomerView();
-            view.DataContext = this.SelectedCustomer;
+            view.DataContext = customer;
 
             this.navigationService.NavigateTo(view);
         }

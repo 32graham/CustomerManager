@@ -6,6 +6,16 @@
     Height="350"
     Width="525"
     DataContext="{Binding MainVM, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="Themes/Sky.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Frame
             x:Name="MainFrame"

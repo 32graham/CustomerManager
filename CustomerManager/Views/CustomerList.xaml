@@ -12,6 +12,15 @@
     Title="CustomerList"
     DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="../Themes/Sky.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid
         Margin="5">
         <Grid.RowDefinitions>
@@ -24,18 +33,22 @@
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            Margin="5"
             Text="Customers" />
-        <ListBox
+        <ItemsControl
             Grid.Row="1"
-            Margin="5"
-            ItemsSource="{Binding Customers}"
-            SelectedItem="{Binding SelectedCustomer}" />
-        <Button
-            Grid.Row="2"
-            Margin="5"
-            Padding="5"
-            Command="{Binding ViewDetailCommand}"
-            Content="View Detail" />
+            ItemsSource="{Binding Customers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Hyperlink
+                            CommandParameter="{Binding}"
+                            Command="{Binding DataContext.ViewDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
+                            <TextBlock
+                                Text="{Binding FirstName}" />
+                        </Hyperlink>
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Page>
