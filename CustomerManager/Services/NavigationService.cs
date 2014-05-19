@@ -4,18 +4,22 @@
 
     public class NavigationService : INavigationService
     {
+        private System.Windows.Controls.Frame frame
+        {
+            get
+            {
+                return (Application.Current.MainWindow as CustomerManager.MainWindow).MainFrame;
+            }
+        }
+
         public void GoBack()
         {
-            var frame = (Application.Current.MainWindow as CustomerManager.MainWindow).MainFrame;
-
-            frame.GoBack();
+            this.frame.GoBack();
         }
 
         public void NavigateTo(object destination)
         {
-            var frame = (Application.Current.MainWindow as CustomerManager.MainWindow).MainFrame;
-
-            frame.Navigate(destination);
+            this.frame.Navigate(destination);
         }
     }
 }

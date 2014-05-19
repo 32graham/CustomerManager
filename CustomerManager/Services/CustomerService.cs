@@ -3,12 +3,15 @@
     using CustomerManager.Models;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class CustomerService : ICustomerService
     {
-        public IEnumerable<CustomerDTO> List()
+        private List<CustomerDTO> customers;
+
+        public CustomerService()
         {
-            var list = new List<CustomerDTO>();
+            this.customers = new List<CustomerDTO>();
 
             var josh = new CustomerDTO
             {
@@ -42,41 +45,25 @@
                 Birthday = new DateTime(year: 102, month: 4, day: 18)
             };
 
-            list.Add(josh);
-            list.Add(brandy);
-            list.Add(fred);
-            list.Add(wilma);
+            this.customers.Add(josh);
+            this.customers.Add(brandy);
+            this.customers.Add(fred);
+            this.customers.Add(wilma);
+        }
 
-            return list;
+        public IEnumerable<CustomerDTO> List()
+        {
+            return this.customers;
         }
 
         public Models.CustomerDTO Get(int id)
         {
-            if (id == 1)
-            {
-                return new CustomerDTO
-                {
-                    Id = 1,
-                    FirstName = "Josh",
-                    LastName = "Graham",
-                    Birthday = new DateTime(year: 1988, month: 1, day: 12),
-                };
-            }
-            else if (id == 2)
-            {
-                return new CustomerDTO
-                {
-                    Id = 2,
-                    FirstName = "Brandy",
-                    LastName = "Graham",
-                    Birthday = new DateTime(year: 1988, month: 9, day: 24),
-                };
+            return this.customers.First(x => x.Id == id);
+        }
 
-            }
-            else
-            {
-                return null;
-            }
+        public void Save(CustomerDTO customer)
+        {
+            this.customers.Add(customer);
         }
     }
 }
