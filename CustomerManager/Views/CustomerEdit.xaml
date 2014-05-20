@@ -32,5 +32,6 @@
             Content="Birthday:" />
         <TextBox
             Text="{Binding Birthday}" />
+        <Button Content="Save" Command="{Binding SaveCommand}"/>
     </StackPanel>
 </Page>

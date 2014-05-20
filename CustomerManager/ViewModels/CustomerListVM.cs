@@ -26,7 +26,7 @@
 
             foreach (var model in models)
             {
-                var vm = new CustomerVM(navigationService);
+                var vm = new CustomerVM(this.navigationService, this.customerService);
                 vm.FirstName = model.FirstName;
                 vm.LastName = model.LastName;
                 vm.Birthday = model.Birthday;

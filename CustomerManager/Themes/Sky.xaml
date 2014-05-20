@@ -25,5 +25,18 @@
             Property="Margin"
             Value="5" />
     </Style>
+    
+    <Style
+        TargetType="{x:Type Button}">
+        <Setter
+            Property="Margin"
+            Value="5" />
+        <Setter
+            Property="Padding"
+            Value="5" />
+        <Setter
+            Property="FontSize"
+            Value="15" />
+    </Style>
 
 </ResourceDictionary>
