@@ -5,6 +5,7 @@
     public interface INavigationService
     {
         void GoBack();
+
         void NavigateTo(object destination);
     }
 }

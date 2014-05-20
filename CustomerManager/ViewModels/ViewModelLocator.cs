@@ -28,7 +28,6 @@ namespace CustomerManager.ViewModel
             SimpleIoc.Default.Register<ICustomerService, CustomerService>();
             SimpleIoc.Default.Register<MainVM>();
             SimpleIoc.Default.Register<CustomerListVM>();
-            
         }
 
         public MainVM MainVM

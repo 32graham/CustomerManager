@@ -4,7 +4,7 @@
 
     public class NavigationService : INavigationService
     {
-        private System.Windows.Controls.Frame frame
+        private System.Windows.Controls.Frame Frame
         {
             get
             {
@@ -14,12 +14,12 @@
 
         public void GoBack()
         {
-            this.frame.GoBack();
+            this.Frame.GoBack();
         }
 
         public void NavigateTo(object destination)
         {
-            this.frame.Navigate(destination);
+            this.Frame.Navigate(destination);
         }
     }
 }

@@ -73,7 +73,6 @@
             {
                 this.customers.Add(customer);
             }
-            
         }
     }
 }

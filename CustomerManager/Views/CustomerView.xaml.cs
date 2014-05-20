@@ -6,7 +6,7 @@
     {
         public CustomerView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

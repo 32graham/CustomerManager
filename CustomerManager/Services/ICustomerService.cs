@@ -6,7 +6,9 @@
     public interface ICustomerService
     {
         IEnumerable<CustomerDTO> List();
+
         CustomerDTO Get(int id);
+
         void Save(CustomerDTO customer);
     }
 }

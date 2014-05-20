@@ -1,13 +1,13 @@
-﻿using CustomerManager.Models;
-using CustomerManager.Services;
-using CustomerManager.Views;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System;
-using System.Windows.Input;
-
-namespace CustomerManager.ViewModels
+﻿namespace CustomerManager.ViewModels
 {
+    using CustomerManager.Models;
+    using CustomerManager.Services;
+    using CustomerManager.Views;
+    using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Command;
+    using System;
+    using System.Windows.Input;
+
     public class CustomerVM : ViewModelBase
     {
         private int id;
