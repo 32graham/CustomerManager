@@ -63,7 +63,17 @@
 
         public void Save(CustomerDTO customer)
         {
-            this.customers.Add(customer);
+            var existingCustomer = this.customers.FirstOrDefault(x => x.Id == customer.Id);                            
+            if (existingCustomer != null)
+            {
+                var index = this.customers.IndexOf(existingCustomer);
+                this.customers[index] = customer;
+            }
+            else
+            {
+                this.customers.Add(customer);
+            }
+            
         }
     }
 }

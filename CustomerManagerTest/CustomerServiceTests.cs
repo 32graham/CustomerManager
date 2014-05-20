@@ -36,5 +36,16 @@
             Assert.IsTrue(savedCustomer.Id == 42);
             Assert.IsTrue(savedCustomer.FirstName == "Jon");
         }
+
+        [TestMethod]
+        public void CustomerServiceDoesNotDuplicateIds()
+        {
+            var customerService = new CustomerService();
+            customerService.Save(new CustomerDTO { Id = 96, FirstName = "Bob", });
+            customerService.Save(new CustomerDTO { Id = 96, FirstName = "Larry", });
+
+            var count = customerService.List().Where(x => x.Id == 96).Count();
+            Assert.IsTrue(count == 1);
+        }
     }
 }
