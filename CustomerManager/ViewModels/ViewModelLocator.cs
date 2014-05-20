@@ -2,6 +2,7 @@ namespace CustomerManager.ViewModel
 {
     using CustomerManager.Services;
     using CustomerManager.ViewModels;
+    using CustomerManager.Views;
     using GalaSoft.MvvmLight.Ioc;
     using Microsoft.Practices.ServiceLocation;
     using System.Windows;
@@ -28,6 +29,7 @@ namespace CustomerManager.ViewModel
             SimpleIoc.Default.Register<ICustomerService, CustomerService>();
             SimpleIoc.Default.Register<MainVM>();
             SimpleIoc.Default.Register<CustomerListVM>();
+            SimpleIoc.Default.Register<CustomerList>();
         }
 
         public MainVM MainVM

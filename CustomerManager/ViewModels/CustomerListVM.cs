@@ -1,27 +1,25 @@
 ﻿namespace CustomerManager.ViewModels
 {
-    using CustomerManager.Models;
     using CustomerManager.Services;
     using CustomerManager.Views;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Collections.ObjectModel;
     using System.Windows.Input;
 
     public class CustomerListVM : ViewModelBase
     {
         private ICustomerService customerService;
         private INavigationService navigationService;
-        private List<CustomerVM> customers;
+        private ObservableCollection<CustomerVM> customers;
 
         public CustomerListVM(ICustomerService customerService, INavigationService navigationService)
         {
             this.customerService = customerService;
             this.navigationService = navigationService;
 
-            this.customers = new List<CustomerVM>();
+            this.customers = new ObservableCollection<CustomerVM>();
             var models = customerService.List();
 
             foreach (var model in models)
@@ -35,11 +33,14 @@
             }
 
             this.ViewDetailCommand = new RelayCommand<CustomerVM>(this.ViewDetail);
+            this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
         }
 
         public ICommand ViewDetailCommand { get; private set; }
 
-        public List<CustomerVM> Customers
+        public ICommand AddNewCustomerCommand { get; private set; }
+
+        public ObservableCollection<CustomerVM> Customers
         {
             get
             {
@@ -54,10 +55,14 @@
 
         private void ViewDetail(CustomerVM customer)
         {
-            var view = new CustomerView();
-            view.DataContext = customer;
+            this.navigationService.NavigateToCustomerView(customer);
+        }
 
-            this.navigationService.NavigateTo(view);
+        private void AddNewCustomer()
+        {
+            var customer = new CustomerVM(this.navigationService, this.customerService);
+            this.customers.Add(customer);
+            this.navigationService.NavigateToCustomerEdit(customer);
         }
     }
 }

@@ -22,10 +22,6 @@
             this.navigationService = navigationService;
             this.customerService = customerService;
 
-            this.FirstName = "Josh";
-            this.LastName = "Graham";
-            this.Birthday = new DateTime(year: 1988, month: 1, day: 12);
-
             this.NavigateToCustomerEditCommand = new RelayCommand(this.NavigateToCustomerEdit);
             this.SaveCommand = new RelayCommand(this.Save);
         }
@@ -88,9 +84,7 @@
 
         public void NavigateToCustomerEdit()
         {
-            var view = new CustomerEdit();
-            view.DataContext = this;
-            this.navigationService.NavigateTo(view);
+            this.navigationService.NavigateToCustomerEdit(this);
         }
 
         public CustomerDTO ToModel()
@@ -113,7 +107,7 @@
         private void Save()
         {
             this.customerService.Save(this.ToModel());
-            this.navigationService.GoBack();
+            this.navigationService.NavigateToCustomerList();
         }
     }
 }
