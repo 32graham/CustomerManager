@@ -1,10 +1,16 @@
 ﻿namespace CustomerManager.Services
 {
-    using System;
+    using CustomerManager.ViewModels;
+using System;
 
     public interface INavigationService
     {
         void GoBack();
-        void NavigateTo(object destination);
+
+        void NavigateToCustomerList();
+
+        void NavigateToCustomerView(CustomerVM customer);
+
+        void NavigateToCustomerEdit(CustomerVM customer);
     }
 }

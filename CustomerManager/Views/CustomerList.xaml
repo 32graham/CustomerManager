@@ -51,5 +51,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Button Content="Add New" Grid.Row="2" IsDefault="True" Command="{Binding AddNewCustomerCommand, Mode=OneWay}"/>
     </Grid>
 </Page>
