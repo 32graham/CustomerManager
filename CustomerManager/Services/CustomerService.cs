@@ -64,6 +64,8 @@
         public void Save(CustomerDTO customer)
         {
             this.customers.Add(customer);
+
+            var test = 1 + 2;
         }
     }
 }
