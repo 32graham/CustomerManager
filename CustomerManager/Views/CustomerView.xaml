@@ -7,7 +7,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     x:Class="CustomerManager.Views.CustomerView"
-    DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}"
+    DataContext="{Binding CustomerListC, Source={StaticResource Locator}}"
     Title="View Customer"
     mc:Ignorable="d ignore">
 
@@ -34,7 +34,11 @@
 
         <TextBlock>
             <Hyperlink
-                Command="{Binding NavigateToCustomerEditCommand}"><Run Text="Edi"/><Run Text="t"/></Hyperlink>
+                CommandParameter="{Binding SelectedCustomer}"
+                Command="{Binding NavigateToCustomerEditCommand}">
+                <Run
+                    Text="Edit" />
+            </Hyperlink>
         </TextBlock>
     </StackPanel>
 </Page>

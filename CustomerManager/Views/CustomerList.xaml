@@ -10,7 +10,7 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     Title="Customer List"
-    DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}">
+    DataContext="{Binding CustomerListC, Source={StaticResource Locator}}">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -43,7 +43,7 @@
                         Margin="5">
                         <Hyperlink
                             CommandParameter="{Binding}"
-                            Command="{Binding DataContext.ViewDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
+                            Command="{Binding DataContext.NavigateToCustomerDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
                             <TextBlock
                                 Text="{Binding FirstName}" />
                         </Hyperlink>

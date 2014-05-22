@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class CustomerDTO
+    public class CustomerM
     {
         public int Id { get; set; }
 

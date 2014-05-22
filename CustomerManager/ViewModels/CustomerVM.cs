@@ -67,7 +67,7 @@
             }
         }
 
-        public static CustomerVM FromModel(CustomerDTO model)
+        public static CustomerVM FromModel(CustomerM model)
         {
             return new CustomerVM()
             {
@@ -78,9 +78,9 @@
             };
         }
 
-        public CustomerDTO ToModel()
+        public CustomerM ToModel()
         {
-            return new CustomerDTO
+            return new CustomerM
             {
                 Id = this.Id,
                 FirstName = this.firstName,

@@ -42,7 +42,7 @@ namespace CustomerManager.ViewModel
             }
         }
 
-        public CustomerListC CustomerListVM
+        public CustomerListC CustomerListC
         {
             get
             {

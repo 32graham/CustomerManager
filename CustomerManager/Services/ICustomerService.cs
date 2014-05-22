@@ -1,14 +1,15 @@
 ﻿namespace CustomerManager.Services
 {
     using CustomerManager.Models;
+    using CustomerManager.ViewModels;
     using System.Collections.Generic;
 
     public interface ICustomerService
     {
-        IEnumerable<CustomerDTO> List();
+        IEnumerable<CustomerVM> List();
 
-        CustomerDTO Get(int id);
+        CustomerVM Get(int id);
 
-        void Save(CustomerDTO customer);
+        void Save(CustomerVM customer);
     }
 }

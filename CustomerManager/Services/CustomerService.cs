@@ -1,19 +1,20 @@
 ﻿namespace CustomerManager.Services
 {
     using CustomerManager.Models;
+    using CustomerManager.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
     public class CustomerService : ICustomerService
     {
-        private List<CustomerDTO> customers;
+        private List<CustomerVM> customers;
 
         public CustomerService()
         {
-            this.customers = new List<CustomerDTO>();
+            this.customers = new List<CustomerVM>();
 
-            var josh = new CustomerDTO
+            var josh = new CustomerVM
             {
                 Id = 1,
                 FirstName = "Josh",
@@ -21,7 +22,7 @@
                 Birthday = new DateTime(year: 1988, month: 1, day: 12),
             };
 
-            var brandy = new CustomerDTO
+            var brandy = new CustomerVM
             {
                 Id = 2,
                 FirstName = "Brandy",
@@ -29,7 +30,7 @@
                 Birthday = new DateTime(year: 1988, month: 9, day: 24),
             };
 
-            var fred = new CustomerDTO
+            var fred = new CustomerVM
             {
                 Id = 3,
                 FirstName = "Fred",
@@ -37,7 +38,7 @@
                 Birthday = new DateTime(year: 100, month: 3, day: 12)
             };
 
-            var wilma = new CustomerDTO
+            var wilma = new CustomerVM
             {
                 Id = 3,
                 FirstName = "Wilma",
@@ -51,17 +52,17 @@
             this.customers.Add(wilma);
         }
 
-        public IEnumerable<CustomerDTO> List()
+        public IEnumerable<CustomerVM> List()
         {
             return this.customers;
         }
 
-        public Models.CustomerDTO Get(int id)
+        public CustomerVM Get(int id)
         {
             return this.customers.First(x => x.Id == id);
         }
 
-        public void Save(CustomerDTO customer)
+        public void Save(CustomerVM customer)
         {
             var existingCustomer = this.customers.FirstOrDefault(x => x.Id == customer.Id);
             if (existingCustomer != null)

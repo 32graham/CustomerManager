@@ -24,13 +24,16 @@
 
             this.LoadCustomers();
 
-            this.ViewDetailCommand = new RelayCommand<CustomerVM>(this.ViewDetail);
+            this.NavigateToCustomerDetailCommand =
+                new RelayCommand<CustomerVM>(this.NavigateToCustomerDetail);
+            this.NavigateToCustomerEditCommand =
+                new RelayCommand<CustomerVM>(this.NavigateToCustomerEdit);
+
             this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
-            this.NavigateToCustomerEditCommand = new RelayCommand(this.ViewEdit);
             this.SaveCommand = new RelayCommand(this.Save);
         }
 
-        public ICommand ViewDetailCommand { get; private set; }
+        public ICommand NavigateToCustomerDetailCommand { get; private set; }
 
         public ICommand NavigateToCustomerEditCommand { get; private set; }
 
@@ -64,7 +67,7 @@
             }
         }
 
-        private void ViewDetail(CustomerVM customer)
+        private void NavigateToCustomerDetail(CustomerVM customer)
         {
             this.selectedCustomer = customer;
             this.navigationService.NavigateToCustomerView(customer);
@@ -79,20 +82,14 @@
 
         private void LoadCustomers()
         {
-            this.customers = new ObservableCollection<CustomerVM>();
-            var models = this.customerService.List();
-
-            foreach (var model in models)
-            {
-                var vm = CustomerVM.FromModel(model);
-                this.customers.Add(vm);
-            }
-
-            this.SelectedCustomer = this.customers.FirstOrDefault();
+            var list = this.customerService.List();
+            this.SelectedCustomer = list.FirstOrDefault();
+            this.Customers = new ObservableCollection<CustomerVM>(list);
         }
 
-        private void ViewEdit()
+        private void NavigateToCustomerEdit(CustomerVM customer)
         {
+            this.selectedCustomer = customer;
             this.navigationService.NavigateToCustomerEdit(this.selectedCustomer);
         }
 
@@ -100,7 +97,7 @@
         {
             foreach (var customer in this.customers)
             {
-                this.customerService.Save(customer.ToModel());
+                this.customerService.Save(customer);
             }
         }
     }

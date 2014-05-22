@@ -70,7 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\CustomerDTO.cs" />
+    <Compile Include="Models\CustomerM.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ICustomerService.cs" />
