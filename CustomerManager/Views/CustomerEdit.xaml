@@ -7,6 +7,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="300"
+    DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}"
     Title="Edit Customer">
 
     <Page.Resources>
@@ -20,18 +21,23 @@
 
     <StackPanel
         Margin="5">
-        <Label
-            Content="First Name:" />
-        <TextBox
-            Text="{Binding FirstName}" />
-        <Label
-            Content="Last Name:" />
-        <TextBox
-            Text="{Binding LastName}" />
-        <Label
-            Content="Birthday:" />
-        <TextBox
-            Text="{Binding Birthday}" />
-        <Button Content="Save" Command="{Binding SaveCommand}"/>
+        <StackPanel
+            DataContext="{Binding SelectedCustomer}">
+            <Label
+                Content="First Name:" />
+            <TextBox
+                Text="{Binding FirstName}" />
+            <Label
+                Content="Last Name:" />
+            <TextBox
+                Text="{Binding LastName}" />
+            <Label
+                Content="Birthday:" />
+            <TextBox
+                Text="{Binding Birthday}" />
+        </StackPanel>
+        <Button
+            Content="Save"
+            Command="{Binding SaveCommand}" />
     </StackPanel>
 </Page>

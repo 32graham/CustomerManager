@@ -1,12 +1,8 @@
 ﻿namespace CustomerManager.ViewModels
 {
     using CustomerManager.Models;
-    using CustomerManager.Services;
-    using CustomerManager.Views;
     using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
     using System;
-    using System.Windows.Input;
 
     public class CustomerVM : ViewModelBase
     {
@@ -14,21 +10,10 @@
         private string firstName;
         private string lastName;
         private DateTime birthday;
-        private INavigationService navigationService;
-        private ICustomerService customerService;
 
-        public CustomerVM(INavigationService navigationService, ICustomerService customerService)
+        public CustomerVM()
         {
-            this.navigationService = navigationService;
-            this.customerService = customerService;
-
-            this.NavigateToCustomerEditCommand = new RelayCommand(this.NavigateToCustomerEdit);
-            this.SaveCommand = new RelayCommand(this.Save);
         }
-
-        public ICommand NavigateToCustomerEditCommand { get; private set; }
-
-        public ICommand SaveCommand { get; private set; }
 
         public int Id
         {
@@ -82,32 +67,31 @@
             }
         }
 
-        public void NavigateToCustomerEdit()
+        public static CustomerVM FromModel(CustomerDTO model)
         {
-            this.navigationService.NavigateToCustomerEdit(this);
+            return new CustomerVM()
+            {
+                Id = model.Id,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Birthday = model.Birthday,
+            };
         }
 
         public CustomerDTO ToModel()
         {
-            var model = new CustomerDTO();
-
-            model.Id = this.Id;
-            model.FirstName = this.FirstName;
-            model.LastName = this.LastName;
-            model.Birthday = this.Birthday;
-
-            return model;
+            return new CustomerDTO
+            {
+                Id = this.Id,
+                FirstName = this.firstName,
+                LastName = this.LastName,
+                Birthday = this.Birthday,
+            };
         }
 
         public override string ToString()
         {
             return this.FirstName;
-        }
-
-        private void Save()
-        {
-            this.customerService.Save(this.ToModel());
-            this.navigationService.NavigateToCustomerList();
         }
     }
 }

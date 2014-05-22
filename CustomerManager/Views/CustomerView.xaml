@@ -7,6 +7,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     x:Class="CustomerManager.Views.CustomerView"
+    DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}"
     Title="View Customer"
     mc:Ignorable="d ignore">
 
@@ -21,12 +22,16 @@
 
     <StackPanel
         Margin="5">
-        <TextBlock
-            Text="{Binding FirstName}" />
-        <TextBlock
-            Text="{Binding LastName}" />
-        <TextBlock
-            Text="{Binding Birthday}" />
+        <StackPanel
+            DataContext="{Binding SelectedCustomer}">
+            <TextBlock
+                Text="{Binding FirstName}" />
+            <TextBlock
+                Text="{Binding LastName}" />
+            <TextBlock
+                Text="{Binding Birthday}" />
+        </StackPanel>
+
         <TextBlock>
             <Hyperlink
                 Command="{Binding NavigateToCustomerEditCommand}"><Run Text="Edi"/><Run Text="t"/></Hyperlink>

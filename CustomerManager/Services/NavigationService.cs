@@ -29,14 +29,12 @@
         public void NavigateToCustomerView(ViewModels.CustomerVM customer)
         {
             var view = new CustomerView();
-            view.DataContext = customer;
             this.Frame.Navigate(view);
         }
 
         public void NavigateToCustomerEdit(ViewModels.CustomerVM customer)
         {
             var view = new CustomerEdit();
-            view.DataContext = customer;
             this.Frame.Navigate(view);
         }
     }

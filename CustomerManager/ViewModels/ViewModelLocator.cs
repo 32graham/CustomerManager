@@ -1,5 +1,7 @@
+using CustomerManager.ViewModels;
 namespace CustomerManager.ViewModel
 {
+    using CustomerManager.Controllers;
     using CustomerManager.Services;
     using CustomerManager.ViewModels;
     using CustomerManager.Views;
@@ -28,7 +30,7 @@ namespace CustomerManager.ViewModel
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<ICustomerService, CustomerService>();
             SimpleIoc.Default.Register<MainVM>();
-            SimpleIoc.Default.Register<CustomerListVM>();
+            SimpleIoc.Default.Register<CustomerListC>();
             SimpleIoc.Default.Register<CustomerList>();
         }
 
@@ -40,11 +42,11 @@ namespace CustomerManager.ViewModel
             }
         }
 
-        public CustomerListVM CustomerListVM
+        public CustomerListC CustomerListVM
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<CustomerListVM>();
+                return ServiceLocator.Current.GetInstance<CustomerListC>();
             }
         }
 
