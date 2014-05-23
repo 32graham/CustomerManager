@@ -70,14 +70,15 @@
         private void NavigateToCustomerDetail(CustomerVM customer)
         {
             this.selectedCustomer = customer;
-            this.navigationService.NavigateToCustomerView(customer);
+            this.navigationService.NavigateToCustomerView();
         }
 
         private void AddNewCustomer()
         {
             var customer = new CustomerVM();
             this.customers.Add(customer);
-            this.navigationService.NavigateToCustomerEdit(customer);
+            this.SelectedCustomer = customer;
+            this.navigationService.NavigateToCustomerEdit();
         }
 
         private void LoadCustomers()
@@ -90,7 +91,7 @@
         private void NavigateToCustomerEdit(CustomerVM customer)
         {
             this.selectedCustomer = customer;
-            this.navigationService.NavigateToCustomerEdit(this.selectedCustomer);
+            this.navigationService.NavigateToCustomerEdit();
         }
 
         private void Save()
@@ -99,6 +100,8 @@
             {
                 this.customerService.Save(customer);
             }
+
+            this.navigationService.NavigateToCustomerList();
         }
     }
 }

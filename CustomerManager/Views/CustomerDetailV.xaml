@@ -1,14 +1,15 @@
 ﻿<Page
-    x:Class="CustomerManager.Views.CustomerEdit"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ignore="http://www.ignore.com"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    x:Class="CustomerManager.Views.CustomerDetailV"
     DataContext="{Binding CustomerListC, Source={StaticResource Locator}}"
-    Title="Edit Customer">
+    Title="View Customer"
+    mc:Ignorable="d ignore">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -23,21 +24,21 @@
         Margin="5">
         <StackPanel
             DataContext="{Binding SelectedCustomer}">
-            <Label
-                Content="First Name:" />
-            <TextBox
+            <TextBlock
                 Text="{Binding FirstName}" />
-            <Label
-                Content="Last Name:" />
-            <TextBox
+            <TextBlock
                 Text="{Binding LastName}" />
-            <Label
-                Content="Birthday:" />
-            <TextBox
+            <TextBlock
                 Text="{Binding Birthday}" />
         </StackPanel>
-        <Button
-            Content="Save"
-            Command="{Binding SaveCommand}" />
+
+        <TextBlock>
+            <Hyperlink
+                CommandParameter="{Binding SelectedCustomer}"
+                Command="{Binding NavigateToCustomerEditCommand}">
+                <Run
+                    Text="Edit" />
+            </Hyperlink>
+        </TextBlock>
     </StackPanel>
 </Page>

@@ -22,19 +22,19 @@
 
         public void NavigateToCustomerList()
         {
-            var view = ServiceLocator.Current.GetInstance<CustomerList>();
+            var view = ServiceLocator.Current.GetInstance<CustomerListV>();
             this.Frame.Navigate(view);
         }
 
-        public void NavigateToCustomerView(ViewModels.CustomerVM customer)
+        public void NavigateToCustomerView()
         {
-            var view = new CustomerView();
+            var view = new CustomerDetailV();
             this.Frame.Navigate(view);
         }
 
-        public void NavigateToCustomerEdit(ViewModels.CustomerVM customer)
+        public void NavigateToCustomerEdit()
         {
-            var view = new CustomerEdit();
+            var view = new CustomerEditV();
             this.Frame.Navigate(view);
         }
     }

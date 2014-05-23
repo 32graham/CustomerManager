@@ -2,9 +2,9 @@
 {
     using System.Windows.Controls;
 
-    public partial class CustomerEdit : Page
+    public partial class CustomerEditV : Page
     {
-        public CustomerEdit()
+        public CustomerEditV()
         {
             this.InitializeComponent();
         }

@@ -9,8 +9,8 @@ using System;
 
         void NavigateToCustomerList();
 
-        void NavigateToCustomerView(CustomerVM customer);
+        void NavigateToCustomerView();
 
-        void NavigateToCustomerEdit(CustomerVM customer);
+        void NavigateToCustomerEdit();
     }
 }

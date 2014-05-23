@@ -81,14 +81,14 @@
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\CustomerEdit.xaml.cs">
-      <DependentUpon>CustomerEdit.xaml</DependentUpon>
+    <Compile Include="Views\CustomerEditV.xaml.cs">
+      <DependentUpon>CustomerEditV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CustomerList.xaml.cs">
-      <DependentUpon>CustomerList.xaml</DependentUpon>
+    <Compile Include="Views\CustomerListV.xaml.cs">
+      <DependentUpon>CustomerListV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CustomerView.xaml.cs">
-      <DependentUpon>CustomerView.xaml</DependentUpon>
+    <Compile Include="Views\CustomerDetailV.xaml.cs">
+      <DependentUpon>CustomerDetailV.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -106,16 +106,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomerEdit.xaml">
+    <Page Include="Views\CustomerEditV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomerList.xaml">
+    <Page Include="Views\CustomerListV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomerView.xaml">
-      <SubType>Form</SubType>
+    <Page Include="Views\CustomerDetailV.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

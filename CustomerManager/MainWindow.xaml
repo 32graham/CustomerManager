@@ -10,6 +10,6 @@
         <Frame
             x:Name="MainFrame"
             x:FieldModifier="public"
-            Source="./Views/CustomerList.xaml" />
+            Source="./Views/CustomerListV.xaml" />
     </Grid>
 </Window>

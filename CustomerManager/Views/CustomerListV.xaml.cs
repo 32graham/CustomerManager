@@ -3,9 +3,9 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    public partial class CustomerList : Page
+    public partial class CustomerListV : Page
     {
-        public CustomerList()
+        public CustomerListV()
         {
             this.InitializeComponent();
         }

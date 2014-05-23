@@ -2,9 +2,9 @@
 {
     using System.Windows.Controls;
 
-    public partial class CustomerView : Page
+    public partial class CustomerDetailV : Page
     {
-        public CustomerView()
+        public CustomerDetailV()
         {
             this.InitializeComponent();
         }
