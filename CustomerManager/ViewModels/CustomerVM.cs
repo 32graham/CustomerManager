@@ -13,6 +13,9 @@
 
         public CustomerVM()
         {
+            this.firstName = string.Empty;
+            this.lastName = string.Empty;
+            this.birthday = DateTime.Now.AddYears(-25);
         }
 
         public int Id
@@ -91,7 +94,12 @@
 
         public override string ToString()
         {
-            return this.FirstName;
+            return GetFullName();
+        }
+
+        private string GetFullName()
+        {
+            return this.FirstName + " " + this.LastName;
         }
     }
 }
