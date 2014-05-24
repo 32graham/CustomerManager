@@ -5,11 +5,46 @@
     Title="MainWindow"
     Height="350"
     Width="525"
-    DataContext="{Binding MainVM, Source={StaticResource Locator}}">
+    DataContext="{Binding CustomerListC, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/Themes/Sky.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        	<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
         <Frame
             x:Name="MainFrame"
             x:FieldModifier="public"
+            Grid.Row="0"
             Source="./Views/CustomerListV.xaml" />
+        <WrapPanel
+            Grid.Row="1"
+            HorizontalAlignment="Right">
+            <TextBlock TextWrapping="Wrap" Text="Processing..." VerticalAlignment="Center" Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <Button
+                Content="Home"
+                Command="{Binding NavigateToCustomerListCommand}" />
+            <Button
+                Content="Add"
+                Command="{Binding AddNewCustomerCommand}" />
+            <Button
+                Content="Save"
+                Command="{Binding SaveCommand}" />
+            <Button
+                Content="Refresh"
+                Command="{Binding RefreshCommand}" />
+        </WrapPanel>
     </Grid>
 </Window>

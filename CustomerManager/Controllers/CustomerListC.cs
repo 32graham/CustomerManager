@@ -5,8 +5,10 @@
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
     using System.Collections.ObjectModel;
-    using System.Windows.Input;
     using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
 
     public class CustomerListC : ViewModelBase
     {
@@ -14,6 +16,7 @@
         private INavigationService navigationService;
         private ObservableCollection<CustomerVM> customers;
         private CustomerVM selectedCustomer;
+        private bool isProcessing;
 
         public CustomerListC(
             ICustomerService customerService,
@@ -28,18 +31,25 @@
                 new RelayCommand<CustomerVM>(this.NavigateToCustomerDetail);
             this.NavigateToCustomerEditCommand =
                 new RelayCommand<CustomerVM>(this.NavigateToCustomerEdit);
+            this.NavigateToCustomerListCommand =
+                new RelayCommand(this.NavigateToCustomerList);
 
             this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
             this.SaveCommand = new RelayCommand(this.Save);
+            this.RefreshCommand = new RelayCommand(this.LoadCustomers);
         }
 
         public ICommand NavigateToCustomerDetailCommand { get; private set; }
 
         public ICommand NavigateToCustomerEditCommand { get; private set; }
 
+        public ICommand NavigateToCustomerListCommand { get; private set; }
+
         public ICommand AddNewCustomerCommand { get; private set; }
 
         public ICommand SaveCommand { get; private set; }
+
+        public ICommand RefreshCommand { get; private set; }
 
         public ObservableCollection<CustomerVM> Customers
         {
@@ -48,7 +58,7 @@
                 return this.customers;
             }
 
-            set
+            private set
             {
                 this.Set(() => this.Customers, ref this.customers, value);
             }
@@ -61,9 +71,22 @@
                 return this.selectedCustomer;
             }
 
-            set
+            private set
             {
                 this.Set(() => this.SelectedCustomer, ref this.selectedCustomer, value);
+            }
+        }
+
+        public bool IsProcessing
+        {
+            get
+            {
+                return this.isProcessing;
+            }
+
+            private set
+            {
+                this.Set(() => this.IsProcessing, ref this.isProcessing, value);
             }
         }
 
@@ -81,11 +104,20 @@
             this.navigationService.NavigateToCustomerEdit();
         }
 
-        private void LoadCustomers()
+        private async void LoadCustomers()
         {
-            var list = this.customerService.List();
-            this.SelectedCustomer = list.FirstOrDefault();
-            this.Customers = new ObservableCollection<CustomerVM>(list);
+            try
+            {
+                this.IsProcessing = true;
+                var list = this.customerService.List();
+                this.SelectedCustomer = list.FirstOrDefault();
+                this.Customers = new ObservableCollection<CustomerVM>(list);
+                await Task.Delay(3000);
+            }
+            finally
+            {
+                this.IsProcessing = false;
+            }
         }
 
         private void NavigateToCustomerEdit(CustomerVM customer)
@@ -94,14 +126,30 @@
             this.navigationService.NavigateToCustomerEdit();
         }
 
-        private void Save()
+        private void NavigateToCustomerList()
         {
-            foreach (var customer in this.customers)
-            {
-                this.customerService.Save(customer);
-            }
-
             this.navigationService.NavigateToCustomerList();
+        }
+
+        private async void Save()
+        {
+            try
+            {
+                this.IsProcessing = true;
+
+                foreach (var customer in this.customers)
+                {
+                    this.customerService.Save(customer);
+                }
+
+                this.navigationService.NavigateToCustomerList();
+
+                await Task.Delay(3000);
+            }
+            finally
+            {
+                this.IsProcessing = false;
+            }
         }
     }
 }

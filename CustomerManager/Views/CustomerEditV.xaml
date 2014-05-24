@@ -8,7 +8,9 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     DataContext="{Binding CustomerListC, Source={StaticResource Locator}}"
-    Title="Edit Customer" Height="Auto" Width="Auto">
+    Title="Edit Customer"
+    Height="Auto"
+    Width="Auto">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -19,28 +21,20 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid>
-    	<Grid.RowDefinitions>
-    		<RowDefinition/>
-    		<RowDefinition Height="Auto"/>
-    	</Grid.RowDefinitions>
+    <StackPanel
+        DataContext="{Binding SelectedCustomer}">
+        <Label
+            Content="First Name:" />
+        <TextBox
+            Text="{Binding FirstName}" />
+        <Label
+            Content="Last Name:" />
+        <TextBox
+            Text="{Binding LastName}" />
+        <Label
+            Content="Birthday:" />
+        <TextBox
+            Text="{Binding Birthday}" />
+    </StackPanel>
 
-		<StackPanel
-            DataContext="{Binding SelectedCustomer}"><Label
-				Content="First Name:" />
-			<TextBox
-				Text="{Binding FirstName}" />
-			<Label
-				Content="Last Name:" />
-			<TextBox
-				Text="{Binding LastName}" />
-			<Label
-				Content="Birthday:" />
-			<TextBox
-				Text="{Binding Birthday}" />
-		</StackPanel>
-		<Button
-			Content="Save"
-			Command="{Binding SaveCommand}" Grid.Row="1" />
-	</Grid>
 </Page>

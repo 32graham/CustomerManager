@@ -1,4 +1,3 @@
-using CustomerManager.ViewModels;
 namespace CustomerManager.ViewModel
 {
     using CustomerManager.Controllers;
@@ -7,7 +6,6 @@ namespace CustomerManager.ViewModel
     using CustomerManager.Views;
     using GalaSoft.MvvmLight.Ioc;
     using Microsoft.Practices.ServiceLocation;
-    using System.Windows;
 
     public class ViewModelLocator
     {
@@ -29,17 +27,8 @@ namespace CustomerManager.ViewModel
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<ICustomerService, CustomerService>();
-            SimpleIoc.Default.Register<MainVM>();
             SimpleIoc.Default.Register<CustomerListC>();
             SimpleIoc.Default.Register<CustomerListV>();
-        }
-
-        public MainVM MainVM
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainVM>();
-            }
         }
 
         public CustomerListC CustomerListC

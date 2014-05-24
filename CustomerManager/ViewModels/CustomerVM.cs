@@ -94,7 +94,7 @@
 
         public override string ToString()
         {
-            return GetFullName();
+            return this.GetFullName();
         }
 
         private string GetFullName()

@@ -1,11 +1,11 @@
-namespace CustomerManager.ViewModels
-{
-    using GalaSoft.MvvmLight;
+//namespace CustomerManager.ViewModels
+//{
+//    using GalaSoft.MvvmLight;
 
-    public class MainVM : ViewModelBase
-    {
-        public MainVM()
-        {
-        }
-    }
-}
+//    public class MainVM : ViewModelBase
+//    {
+//        public MainVM()
+//        {
+//        }
+//    }
+//}
