@@ -2,9 +2,10 @@
 {
     using System;
 
+    [Serializable]
     public class CustomerM
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string FirstName { get; set; }
 

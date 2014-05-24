@@ -4,52 +4,40 @@
     using CustomerManager.ViewModels;
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Web.Script.Serialization;
 
     public class CustomerService : ICustomerService
     {
-        private List<CustomerVM> customers;
+        List<CustomerVM> customers;
+        JavaScriptSerializer serializer;
+        string dataFilePath;
 
         public CustomerService()
         {
+            this.serializer = new JavaScriptSerializer();
             this.customers = new List<CustomerVM>();
+            this.dataFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            this.dataFilePath = Path.Combine(this.dataFilePath, @"customers.json");
 
-            var josh = new CustomerVM
+            if (!File.Exists(this.dataFilePath))
             {
-                Id = 1,
-                FirstName = "Josh",
-                LastName = "Graham",
-                Birthday = new DateTime(year: 1988, month: 1, day: 12),
-            };
+                File.Create(this.dataFilePath);
+            }
 
-            var brandy = new CustomerVM
+            var fileContents = string.Join(string.Empty, File.ReadAllLines(this.dataFilePath));
+
+            var temp = this.serializer.Deserialize<CustomerM[]>(fileContents);
+
+            if (temp == null)
             {
-                Id = 2,
-                FirstName = "Brandy",
-                LastName = "Graham",
-                Birthday = new DateTime(year: 1988, month: 9, day: 24),
-            };
-
-            var fred = new CustomerVM
+                this.customers = new List<CustomerVM>();
+            }
+            else
             {
-                Id = 3,
-                FirstName = "Fred",
-                LastName = "Flinstone",
-                Birthday = new DateTime(year: 100, month: 3, day: 12)
-            };
-
-            var wilma = new CustomerVM
-            {
-                Id = 3,
-                FirstName = "Wilma",
-                LastName = "Flinstone",
-                Birthday = new DateTime(year: 102, month: 4, day: 18)
-            };
-
-            this.customers.Add(josh);
-            this.customers.Add(brandy);
-            this.customers.Add(fred);
-            this.customers.Add(wilma);
+                this.customers = temp.Select(x => CustomerVM.FromModel(x)).ToList();
+            }
         }
 
         public IEnumerable<CustomerVM> List()
@@ -57,14 +45,17 @@
             return this.customers;
         }
 
-        public CustomerVM Get(int id)
+        public CustomerVM Get(Guid id)
         {
-            return this.customers.First(x => x.Id == id);
+            return this.customers
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
         }
 
         public void Save(CustomerVM customer)
         {
-            var existingCustomer = this.customers.FirstOrDefault(x => x.Id == customer.Id);
+            var existingCustomer = this.Get(customer.Id);
+
             if (existingCustomer != null)
             {
                 var index = this.customers.IndexOf(existingCustomer);
@@ -72,8 +63,11 @@
             }
             else
             {
-            this.customers.Add(customer);
+                this.customers.Add(customer);
+            }
+
+            var fileContents = this.serializer.Serialize(this.customers.Select(x => x.ToModel()));
+            File.WriteAllText(this.dataFilePath, fileContents);
         }
     }
-}
 }

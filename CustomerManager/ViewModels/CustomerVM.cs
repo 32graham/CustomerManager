@@ -6,19 +6,20 @@
 
     public class CustomerVM : ViewModelBase
     {
-        private int id;
+        private Guid id;
         private string firstName;
         private string lastName;
         private DateTime birthday;
 
         public CustomerVM()
         {
+            this.Id = Guid.NewGuid();
             this.firstName = string.Empty;
             this.lastName = string.Empty;
             this.birthday = DateTime.Now.AddYears(-25);
         }
 
-        public int Id
+        public Guid Id
         {
             get
             {

@@ -2,6 +2,7 @@
 {
     using CustomerManager.Services;
     using CustomerManager.ViewModels;
+    using CustomerManagerTest.Services;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Linq;
@@ -13,7 +14,7 @@
         [TestCategory("Service")]
         public void CustomerServiceListsCustomers()
         {
-            var customerService = new CustomerService();
+            var customerService = new TestCustomerService();
             var customers = customerService.List();
 
             Assert.IsTrue(customers.Count() > 0);
@@ -23,19 +24,21 @@
         [TestCategory("Service")]
         public void CustomerServiceSavesCustomers()
         {
-            var customerService = new CustomerService();
+            var id = Guid.NewGuid();
+
+            var customerService = new TestCustomerService();
             var customer = new CustomerVM
             {
-                Id = 42,
+                Id = id,
                 FirstName = "Jon",
                 LastName = "Doe",
                 Birthday = DateTime.Now,
             };
 
             customerService.Save(customer);
-            var savedCustomer = customerService.Get(42);
+            var savedCustomer = customerService.Get(id);
 
-            Assert.IsTrue(savedCustomer.Id == 42);
+            Assert.IsTrue(savedCustomer.Id == id);
             Assert.IsTrue(savedCustomer.FirstName == "Jon");
         }
 
@@ -43,11 +46,13 @@
         [TestCategory("Service")]
         public void CustomerServiceDoesNotDuplicateIds()
         {
-            var customerService = new CustomerService();
-            customerService.Save(new CustomerVM { Id = 96, FirstName = "Bob", });
-            customerService.Save(new CustomerVM { Id = 96, FirstName = "Larry", });
+            var id = Guid.NewGuid();
 
-            var count = customerService.List().Where(x => x.Id == 96).Count();
+            var customerService = new TestCustomerService();
+            customerService.Save(new CustomerVM { Id = id, FirstName = "Bob", });
+            customerService.Save(new CustomerVM { Id = id, FirstName = "Larry", });
+
+            var count = customerService.List().Where(x => x.Id == id).Count();
             Assert.IsTrue(count == 1);
         }
     }
