@@ -26,7 +26,7 @@
             this.Frame.Navigate(view);
         }
 
-        public void NavigateToCustomerView()
+        public void NavigateToCustomerDetail()
         {
             var view = new CustomerDetailV();
             this.Frame.Navigate(view);
@@ -35,6 +35,18 @@
         public void NavigateToCustomerEdit()
         {
             var view = new CustomerEditV();
+            this.Frame.Navigate(view);
+        }
+
+        public void NavigateToEmailAddressDetail()
+        {
+            var view = new EmailAddressDetailV();
+            this.Frame.Navigate(view);
+        }
+
+        public void NavigateToEmailAddressEdit()
+        {
+            var view = new EmailAddressEditV();
             this.Frame.Navigate(view);
         }
     }

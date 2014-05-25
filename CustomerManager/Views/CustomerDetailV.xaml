@@ -20,36 +20,47 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <StackPanel
-        Margin="5">
-        <StackPanel
-            DataContext="{Binding SelectedCustomer}">
-            <TextBlock
-                Text="{Binding FirstName}" />
-            <TextBlock
-                Text="{Binding LastName}" />
-            <TextBlock
-                Text="{Binding Birthday}" />
-        </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-        <WrapPanel>
-            <TextBlock>
-                <Hyperlink
-                    CommandParameter="{Binding SelectedCustomer}"
-                    Command="{Binding NavigateToCustomerEditCommand}">
-                    <Run
-                        Text="Edit" />
-                </Hyperlink>
-            </TextBlock>
-            <TextBlock>
-                <Hyperlink
-                    CommandParameter="{Binding SelectedCustomer}"
-                    Command="{Binding DeleteCommand}">
-                    <Run
-                        Text="Delete" />
-                </Hyperlink>
-            </TextBlock>
-        </WrapPanel>
+        <StackPanel>
+            <StackPanel
+                DataContext="{Binding SelectedCustomer}">
+                <TextBlock
+                    Text="{Binding FirstName}" />
+                <TextBlock
+                    Text="{Binding LastName}" />
+                <TextBlock
+                    Text="{Binding Birthday}" />
+            </StackPanel>
+
+            <WrapPanel>
+                <TextBlock><Hyperlink
+                        CommandParameter="{Binding SelectedCustomer}"
+                        Command="{Binding NavigateToCustomerEditCommand}"><Run
+                            Text="Edit" /></Hyperlink></TextBlock>
+                <TextBlock><Hyperlink
+                        CommandParameter="{Binding SelectedCustomer}"
+                        Command="{Binding DeleteCommand}"><Run
+                            Text="Delete" /></Hyperlink></TextBlock>
+            </WrapPanel>
+
+        </StackPanel>
         
-    </StackPanel>
+        <StackPanel
+            Grid.Column="1">
+            <TextBlock
+                Text="Email Addresses"
+                TextDecorations="Underline"
+                FontSize="14"/>
+            <ItemsControl
+                Grid.Column="1"
+                ItemTemplate="{StaticResource EmailAddressDetailDataTemplate}"
+                ItemsSource="{Binding SelectedCustomer.EmailAddresses}" />
+        </StackPanel>
+        
+    </Grid>
 </Page>

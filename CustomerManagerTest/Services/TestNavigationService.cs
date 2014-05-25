@@ -13,11 +13,19 @@
         {
         }
 
-        public void NavigateToCustomerView()
+        public void NavigateToCustomerDetail()
         {
         }
 
         public void NavigateToCustomerEdit()
+        {
+        }
+
+        public void NavigateToEmailAddressDetail()
+        {
+        }
+
+        public void NavigateToEmailAddressEdit()
         {
         }
     }

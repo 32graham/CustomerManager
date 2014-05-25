@@ -8,6 +8,12 @@
     xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="DataTemplates/EmailAddress.xaml" />
+                <ResourceDictionary
+                    Source="DataTemplates/Customer.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelLocator
                 xmlns:vm="clr-namespace:CustomerManager.ViewModel"
                 x:Key="Locator"

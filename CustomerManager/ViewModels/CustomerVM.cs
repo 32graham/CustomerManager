@@ -21,6 +21,7 @@
             this.firstName = string.Empty;
             this.lastName = string.Empty;
             this.birthday = DateTime.Now.AddYears(-25);
+            this.EmailAddresses = new ObservableCollection<EmailAddressVM>();
         }
 
         public Guid Id
@@ -82,7 +83,7 @@
                 return this.emailAddresses;
             }
 
-            private set
+            set
             {
                 this.Set(() => this.EmailAddresses, ref this.emailAddresses, value);
             }

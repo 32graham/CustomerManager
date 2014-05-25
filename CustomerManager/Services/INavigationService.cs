@@ -9,8 +9,12 @@ using System;
 
         void NavigateToCustomerList();
 
-        void NavigateToCustomerView();
+        void NavigateToCustomerDetail();
 
         void NavigateToCustomerEdit();
+
+        void NavigateToEmailAddressDetail();
+
+        void NavigateToEmailAddressEdit();
     }
 }

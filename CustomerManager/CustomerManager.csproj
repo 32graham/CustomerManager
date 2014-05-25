@@ -96,6 +96,20 @@
     <Compile Include="Views\CustomerDetailV.xaml.cs">
       <DependentUpon>CustomerDetailV.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EmailAddressDetailV.xaml.cs">
+      <DependentUpon>EmailAddressDetailV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmailAddressEditV.xaml.cs">
+      <DependentUpon>EmailAddressEditV.xaml</DependentUpon>
+    </Compile>
+    <Page Include="DataTemplates\Customer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\EmailAddress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,6 +135,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CustomerDetailV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmailAddressDetailV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmailAddressEditV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

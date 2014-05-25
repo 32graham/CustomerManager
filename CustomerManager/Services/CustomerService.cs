@@ -4,6 +4,7 @@
     using CustomerManager.ViewModels;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -11,9 +12,10 @@
 
     public class CustomerService : ICustomerService
     {
-        List<CustomerVM> customers;
-        JavaScriptSerializer serializer;
-        string dataFilePath;
+        private List<CustomerVM> customers;
+        private List<AddressTypeVM> addressTypes;
+        private JavaScriptSerializer serializer;
+        private string dataFilePath;
 
         public CustomerService()
         {
@@ -39,6 +41,69 @@
             {
                 this.customers = temp.Select(x => CustomerVM.FromModel(x)).ToList();
             }
+
+            var emails = new ObservableCollection<EmailAddressVM>();
+
+            this.addressTypes = new List<AddressTypeVM>();
+
+            addressTypes.Add(
+                new AddressTypeVM
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Personal",
+                });
+
+            addressTypes.Add(
+                new AddressTypeVM
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Work",
+                });
+
+            emails.Add(new EmailAddressVM
+                {
+                    Id = Guid.NewGuid(),
+                    AddressType = this.addressTypes.First(),
+                    Address = "graham.josh@gmail.com",
+                });
+
+            var josh = new CustomerVM
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Josh",
+                LastName = "Graham",
+                Birthday = new DateTime(year: 1988, month: 1, day: 12),
+                EmailAddresses = emails,
+            };
+
+            var brandy = new CustomerVM
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Brandy",
+                LastName = "Graham",
+                Birthday = new DateTime(year: 1988, month: 9, day: 24),
+            };
+
+            var fred = new CustomerVM
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Fred",
+                LastName = "Flinstone",
+                Birthday = new DateTime(year: 100, month: 3, day: 12)
+            };
+
+            var wilma = new CustomerVM
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Wilma",
+                LastName = "Flinstone",
+                Birthday = new DateTime(year: 102, month: 4, day: 18)
+            };
+
+            this.customers.Add(josh);
+            this.customers.Add(brandy);
+            this.customers.Add(fred);
+            this.customers.Add(wilma);
         }
 
         public async Task<IEnumerable<CustomerVM>> List()
@@ -90,6 +155,11 @@
             File.WriteAllText(this.dataFilePath, fileContents);
 
             await Task.Delay(500);
+        }
+
+        public async Task<IEnumerable<AddressTypeVM>> ListAddressTypes()
+        {
+            return this.addressTypes;
         }
     }
 }

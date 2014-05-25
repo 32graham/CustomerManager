@@ -1,0 +1,17 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate
+        x:Key="EmailAddressDetailDataTemplate">
+        <StackPanel>
+            <TextBlock>
+                <Hyperlink
+                    CommandParameter="{Binding}"
+                    Command="{Binding DataContext.NavigateToEmailAddressDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
+                    <Run
+                        Text="{Binding Address}" />
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

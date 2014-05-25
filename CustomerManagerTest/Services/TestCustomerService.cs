@@ -79,5 +79,26 @@ namespace CustomerManagerTest.Services
             var customerToRemove = this.customers.First(x => x.Id == customer.Id);
             this.customers.Remove(customerToRemove);
         }
+
+        public async Task<IEnumerable<AddressTypeVM>> ListAddressTypes()
+        {
+            var addressTypes = new List<AddressTypeVM>();
+
+            addressTypes.Add(
+                new AddressTypeVM
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Personal",
+                });
+
+            addressTypes.Add(
+                new AddressTypeVM
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Work",
+                });
+
+            return addressTypes;
+        }
     }
 }

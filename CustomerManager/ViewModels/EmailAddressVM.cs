@@ -21,7 +21,7 @@ namespace CustomerManager.ViewModels
                 return this.id;
             }
 
-            private set
+            set
             {
                 this.Set(() => this.Id, ref this.id, value);
             }

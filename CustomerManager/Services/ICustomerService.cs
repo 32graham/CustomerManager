@@ -14,5 +14,7 @@
         Task Save(CustomerVM customer);
 
         Task Delete(CustomerVM customer);
+
+        Task<IEnumerable<AddressTypeVM>> ListAddressTypes();
     }
 }

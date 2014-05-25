@@ -34,20 +34,7 @@
             Text="Customers" />
         <ItemsControl
             Grid.Row="1"
-            ItemsSource="{Binding Customers}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock
-                        Margin="5">
-                        <Hyperlink
-                            CommandParameter="{Binding}"
-                            Command="{Binding DataContext.NavigateToCustomerDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
-                            <Run
-                                Text="{Binding Mode=OneWay}" />
-                        </Hyperlink>
-                    </TextBlock>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            ItemsSource="{Binding Customers}"
+            ItemTemplate="{StaticResource CustomerSummaryDataTemplate}" />
     </Grid>
 </Page>

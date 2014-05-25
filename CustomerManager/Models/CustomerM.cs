@@ -1,7 +1,7 @@
 ﻿namespace CustomerManager.Models
 {
     using System;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 
     [Serializable]
     public class CustomerM

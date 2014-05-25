@@ -4,7 +4,7 @@
 using GalaSoft.MvvmLight;
 using System;
 
-    public class AddressTypeVM : ViewModelBase
+    public class AddressTypeVM : ViewModelBase, IEquatable<AddressTypeVM>
     {
         private Guid id;
         private string name;
@@ -16,7 +16,7 @@ using System;
                 return this.id;
             }
 
-            private set
+            set
             {
                 this.Set(() => this.Id, ref this.id, value);
             }
@@ -51,6 +51,23 @@ using System;
                 Id = this.Id,
                 Name = this.Name,
             };
+        }
+
+        public bool Equals(AddressTypeVM other)
+        {
+            if (this.Id == Guid.Empty)
+            {
+                return false;
+            }
+            else
+            {
+                return this.Id == other.Id;
+            }
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }
