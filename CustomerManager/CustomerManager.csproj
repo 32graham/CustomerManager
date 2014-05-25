@@ -78,7 +78,7 @@
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Controllers\CustomerListC.cs" />
+    <Compile Include="Controllers\CustomerC.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />

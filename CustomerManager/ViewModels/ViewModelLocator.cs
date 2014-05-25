@@ -27,15 +27,15 @@ namespace CustomerManager.ViewModel
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<ICustomerService, CustomerService>();
-            SimpleIoc.Default.Register<CustomerListC>();
+            SimpleIoc.Default.Register<CustomerC>();
             SimpleIoc.Default.Register<CustomerListV>();
         }
 
-        public CustomerListC CustomerListC
+        public CustomerC CustomerListC
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<CustomerListC>();
+                return ServiceLocator.Current.GetInstance<CustomerC>();
             }
         }
 

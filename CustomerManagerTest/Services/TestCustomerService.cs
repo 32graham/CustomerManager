@@ -5,12 +5,13 @@ namespace CustomerManagerTest.Services
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
-    public class TestCustomerService : CustomerService
+    public class TestCustomerService : ICustomerService
     {
         private List<CustomerVM> customers;
 
-        public TestCustomerService()
+        public async Task<IEnumerable<CustomerVM>> List()
         {
             this.customers = new List<CustomerVM>();
 
@@ -50,19 +51,16 @@ namespace CustomerManagerTest.Services
             this.customers.Add(brandy);
             this.customers.Add(fred);
             this.customers.Add(wilma);
-        }
 
-        public IEnumerable<CustomerVM> List()
-        {
             return this.customers;
         }
 
-        public CustomerVM Get(Guid id)
+        public async Task<CustomerVM> Get(Guid id)
         {
             return this.customers.First(x => x.Id == id);
         }
 
-        public void Save(CustomerVM customer)
+        public async Task Save(CustomerVM customer)
         {
             var existingCustomer = this.customers.FirstOrDefault(x => x.Id == customer.Id);
             if (existingCustomer != null)
@@ -74,6 +72,12 @@ namespace CustomerManagerTest.Services
             {
                 this.customers.Add(customer);
             }
+        }
+
+        public async Task Delete(CustomerVM customer)
+        {
+            var customerToRemove = this.customers.First(x => x.Id == customer.Id);
+            this.customers.Remove(customerToRemove);
         }
     }
 }

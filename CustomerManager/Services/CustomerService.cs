@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Script.Serialization;
 
     public class CustomerService : ICustomerService
@@ -40,21 +41,23 @@
             }
         }
 
-        public IEnumerable<CustomerVM> List()
+        public async Task<IEnumerable<CustomerVM>> List()
         {
+            await Task.Delay(1000);
             return this.customers;
         }
 
-        public CustomerVM Get(Guid id)
+        public async Task<CustomerVM> Get(Guid id)
         {
+            await Task.Delay(500);
             return this.customers
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
         }
 
-        public void Save(CustomerVM customer)
+        public async Task Save(CustomerVM customer)
         {
-            var existingCustomer = this.Get(customer.Id);
+            var existingCustomer = await this.Get(customer.Id);
 
             if (existingCustomer != null)
             {
@@ -66,8 +69,27 @@
                 this.customers.Add(customer);
             }
 
+            await WriteToDisk();
+        }
+
+        public async Task Delete(CustomerVM customer)
+        {
+            var customerToRemove = await this.Get(customer.Id);
+
+            if (customerToRemove != null)
+            {
+                this.customers.Remove(customerToRemove);
+            }
+
+            await WriteToDisk();
+        }
+
+        public async Task WriteToDisk()
+        {
             var fileContents = this.serializer.Serialize(this.customers.Select(x => x.ToModel()));
             File.WriteAllText(this.dataFilePath, fileContents);
+
+            await Task.Delay(500);
         }
     }
 }

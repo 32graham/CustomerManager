@@ -1,16 +1,18 @@
 ﻿namespace CustomerManager.Services
 {
-    using CustomerManager.Models;
     using CustomerManager.ViewModels;
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface ICustomerService
     {
-        IEnumerable<CustomerVM> List();
+        Task<IEnumerable<CustomerVM>> List();
 
-        CustomerVM Get(Guid id);
+        Task<CustomerVM> Get(Guid id);
 
-        void Save(CustomerVM customer);
+        Task Save(CustomerVM customer);
+
+        Task Delete(CustomerVM customer);
     }
 }

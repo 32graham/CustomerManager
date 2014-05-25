@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManager", "CustomerManager\CustomerManager.csproj", "{3D47D610-3926-42E8-9E93-DC122DDE372A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagerTest", "CustomerManagerTest\CustomerManagerTest.csproj", "{919B6732-A257-40B9-B649-8942D3155E0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManager.Test", "CustomerManagerTest\CustomerManager.Test.csproj", "{919B6732-A257-40B9-B649-8942D3155E0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

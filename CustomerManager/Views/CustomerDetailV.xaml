@@ -32,13 +32,24 @@
                 Text="{Binding Birthday}" />
         </StackPanel>
 
-        <TextBlock>
-            <Hyperlink
-                CommandParameter="{Binding SelectedCustomer}"
-                Command="{Binding NavigateToCustomerEditCommand}">
-                <Run
-                    Text="Edit" />
-            </Hyperlink>
-        </TextBlock>
+        <WrapPanel>
+            <TextBlock>
+                <Hyperlink
+                    CommandParameter="{Binding SelectedCustomer}"
+                    Command="{Binding NavigateToCustomerEditCommand}">
+                    <Run
+                        Text="Edit" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock>
+                <Hyperlink
+                    CommandParameter="{Binding SelectedCustomer}"
+                    Command="{Binding DeleteCommand}">
+                    <Run
+                        Text="Delete" />
+                </Hyperlink>
+            </TextBlock>
+        </WrapPanel>
+        
     </StackPanel>
 </Page>

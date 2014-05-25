@@ -4,13 +4,13 @@
     using CustomerManager.ViewModels;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
+    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
-    public class CustomerListC : ViewModelBase
+    public class CustomerC : ViewModelBase
     {
         private ICustomerService customerService;
         private INavigationService navigationService;
@@ -18,7 +18,7 @@
         private CustomerVM selectedCustomer;
         private bool isProcessing;
 
-        public CustomerListC(
+        public CustomerC(
             ICustomerService customerService,
             INavigationService navigationService)
         {
@@ -33,6 +33,7 @@
                 new RelayCommand<CustomerVM>(this.NavigateToCustomerEdit);
             this.NavigateToCustomerListCommand =
                 new RelayCommand(this.NavigateToCustomerList);
+            this.DeleteCommand = new RelayCommand<CustomerVM>(this.Delete, this.CanDelete);
 
             this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
             this.SaveCommand = new RelayCommand(this.Save);
@@ -50,6 +51,8 @@
         public ICommand SaveCommand { get; private set; }
 
         public ICommand RefreshCommand { get; private set; }
+
+        public ICommand DeleteCommand { get; private set; }
 
         public ObservableCollection<CustomerVM> Customers
         {
@@ -92,6 +95,11 @@
 
         private void NavigateToCustomerDetail(CustomerVM customer)
         {
+            if (customer == null)
+            {
+                throw new System.ArgumentNullException("customer");
+            }
+
             this.selectedCustomer = customer;
             this.navigationService.NavigateToCustomerView();
         }
@@ -109,10 +117,9 @@
             try
             {
                 this.IsProcessing = true;
-                var list = this.customerService.List();
+                var list = await this.customerService.List();
                 this.SelectedCustomer = list.FirstOrDefault();
                 this.Customers = new ObservableCollection<CustomerVM>(list);
-                await Task.Delay(3000);
             }
             finally
             {
@@ -122,6 +129,11 @@
 
         private void NavigateToCustomerEdit(CustomerVM customer)
         {
+            if (customer == null)
+            {
+                throw new ArgumentNullException("customer");
+            }
+
             this.selectedCustomer = customer;
             this.navigationService.NavigateToCustomerEdit();
         }
@@ -139,17 +151,38 @@
 
                 foreach (var customer in this.customers)
                 {
-                    this.customerService.Save(customer);
+                    await this.customerService.Save(customer);
                 }
 
                 this.navigationService.NavigateToCustomerList();
-
-                await Task.Delay(3000);
             }
             finally
             {
                 this.IsProcessing = false;
             }
+        }
+
+        private async void Delete(CustomerVM customer)
+        {
+            try
+            {
+                this.IsProcessing = true;
+
+                await this.customerService.Delete(customer);
+                this.SelectedCustomer = null;
+                this.Customers.Remove(customer);
+
+                this.navigationService.NavigateToCustomerList();
+            }
+            finally
+            {
+                this.IsProcessing = false;
+            }
+        }
+
+        private bool CanDelete(CustomerVM customer)
+        {
+            return customer != null;
         }
     }
 }

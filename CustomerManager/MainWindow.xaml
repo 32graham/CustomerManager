@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="MainWindow"
     Height="350"
-    Width="525"
+    Width="520"
     DataContext="{Binding CustomerListC, Source={StaticResource Locator}}">
 
     <Window.Resources>
@@ -13,7 +13,7 @@
                 <ResourceDictionary
                     Source="/Themes/Sky.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        	<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
     </Window.Resources>
     
