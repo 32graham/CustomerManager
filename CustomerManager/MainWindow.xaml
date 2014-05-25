@@ -37,14 +37,8 @@
                 Content="Home"
                 Command="{Binding NavigateToCustomerListCommand}" />
             <Button
-                Content="Add"
-                Command="{Binding AddNewCustomerCommand}" />
-            <Button
                 Content="Save"
                 Command="{Binding SaveCommand}" />
-            <Button
-                Content="Refresh"
-                Command="{Binding RefreshCommand}" />
         </WrapPanel>
     </Grid>
 </Window>

@@ -27,17 +27,6 @@
 
         [TestMethod]
         [TestTraits(Trait.Unit)]
-        public void ShouldHaveNewItemsAfterRefresh()
-        {
-            var oldFirstObject = this.controller.Customers.First();
-            this.controller.RefreshCommand.Execute(null);
-            var newFirstObject = this.controller.Customers.First();
-
-            Assert.IsTrue(oldFirstObject != newFirstObject);
-        }
-
-        [TestMethod]
-        [TestTraits(Trait.Unit)]
         public void ShouldChangeSelectionWhenAdding()
         {
             var oldSelectedCustomer = this.controller.SelectedCustomer;

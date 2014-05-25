@@ -32,9 +32,18 @@
         <TextBlock
             Grid.Row="0"
             Text="Customers" />
-        <ItemsControl
-            Grid.Row="1"
-            ItemsSource="{Binding Customers}"
-            ItemTemplate="{StaticResource CustomerSummaryDataTemplate}" />
+        <StackPanel
+            Grid.Row="1">
+            <ItemsControl
+                ItemsSource="{Binding Customers}"
+                ItemTemplate="{StaticResource CustomerSummaryDataTemplate}" />
+            <TextBlock>
+                <Hyperlink
+                    Command="{Binding AddNewCustomerCommand}">
+                    <Run
+                        Text="Add" />
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

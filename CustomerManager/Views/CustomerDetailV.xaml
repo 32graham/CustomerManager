@@ -60,6 +60,13 @@
                 Grid.Column="1"
                 ItemTemplate="{StaticResource EmailAddressDetailDataTemplate}"
                 ItemsSource="{Binding SelectedCustomer.EmailAddresses}" />
+            <TextBlock>
+                <Hyperlink
+                    Command="{Binding AddNewEmailAddressCommand}">
+                    <Run
+                        Text="Add" />
+                </Hyperlink>
+            </TextBlock>
         </StackPanel>
         
     </Grid>

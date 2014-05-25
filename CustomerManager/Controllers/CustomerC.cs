@@ -45,8 +45,8 @@
 
             this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
             this.SaveCommand = new RelayCommand(this.Save);
-            this.RefreshCommand = new RelayCommand(this.LoadCustomers);
             this.DeleteEmailAddressCommand = new RelayCommand(this.DeleteEmailAddress);
+            this.AddNewEmailAddressCommand = new RelayCommand(this.AddNewEmailAddress);
         }
 
         public ICommand NavigateToCustomerDetailCommand { get; private set; }
@@ -61,13 +61,13 @@
 
         public ICommand SaveCommand { get; private set; }
 
-        public ICommand RefreshCommand { get; private set; }
-
         public ICommand DeleteCommand { get; private set; }
 
         public ICommand DeleteEmailAddressCommand { get; private set; }
 
         public ICommand NavigateToEmailAddressEditCommand { get; private set; }
+
+        public ICommand AddNewEmailAddressCommand { get; private set; }
 
         public ObservableCollection<CustomerVM> Customers
         {
@@ -266,6 +266,14 @@
             {
                 this.IsProcessing = false;
             }
+        }
+
+        private void AddNewEmailAddress()
+        {
+            var emailAddress = new EmailAddressVM();
+            this.SelectedCustomer.EmailAddresses.Add(emailAddress);
+            this.SelectedEmailAddress = emailAddress;
+            this.navigationService.NavigateToEmailAddressEdit();
         }
     }
 }

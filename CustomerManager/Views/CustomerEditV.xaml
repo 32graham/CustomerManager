@@ -21,20 +21,19 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <StackPanel
-        DataContext="{Binding SelectedCustomer}">
+    <StackPanel>
         <Label
             Content="First Name:" />
         <TextBox
-            Text="{Binding FirstName}" />
+            Text="{Binding SelectedCustomer.FirstName}" />
         <Label
             Content="Last Name:" />
         <TextBox
-            Text="{Binding LastName}" />
+            Text="{Binding SelectedCustomer.LastName}" />
         <Label
             Content="Birthday:" />
         <TextBox
-            Text="{Binding Birthday}" />
+            Text="{Binding SelectedCustomer.Birthday}" />
     </StackPanel>
 
 </Page>

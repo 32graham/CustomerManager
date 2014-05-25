@@ -26,7 +26,8 @@
 
             if (!File.Exists(this.dataFilePath))
             {
-                File.Create(this.dataFilePath);
+                var stream = File.Create(this.dataFilePath);
+                stream.Dispose();
             }
 
             var fileContents = string.Join(string.Empty, File.ReadAllLines(this.dataFilePath));
@@ -42,7 +43,6 @@
                 this.customers = temp.Select(x => CustomerVM.FromModel(x)).ToList();
             }
 
-            var emails = new ObservableCollection<EmailAddressVM>();
 
             this.addressTypes = new List<AddressTypeVM>();
 
@@ -59,51 +59,6 @@
                     Id = Guid.NewGuid(),
                     Name = "Work",
                 });
-
-            emails.Add(new EmailAddressVM
-                {
-                    Id = Guid.NewGuid(),
-                    AddressType = this.addressTypes.First(),
-                    Address = "graham.josh@gmail.com",
-                });
-
-            var josh = new CustomerVM
-            {
-                Id = Guid.NewGuid(),
-                FirstName = "Josh",
-                LastName = "Graham",
-                Birthday = new DateTime(year: 1988, month: 1, day: 12),
-                EmailAddresses = emails,
-            };
-
-            var brandy = new CustomerVM
-            {
-                Id = Guid.NewGuid(),
-                FirstName = "Brandy",
-                LastName = "Graham",
-                Birthday = new DateTime(year: 1988, month: 9, day: 24),
-            };
-
-            var fred = new CustomerVM
-            {
-                Id = Guid.NewGuid(),
-                FirstName = "Fred",
-                LastName = "Flinstone",
-                Birthday = new DateTime(year: 100, month: 3, day: 12)
-            };
-
-            var wilma = new CustomerVM
-            {
-                Id = Guid.NewGuid(),
-                FirstName = "Wilma",
-                LastName = "Flinstone",
-                Birthday = new DateTime(year: 102, month: 4, day: 18)
-            };
-
-            this.customers.Add(josh);
-            this.customers.Add(brandy);
-            this.customers.Add(fred);
-            this.customers.Add(wilma);
         }
 
         public async Task<IEnumerable<CustomerVM>> List()
