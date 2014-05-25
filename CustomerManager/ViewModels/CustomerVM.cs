@@ -3,6 +3,9 @@
     using CustomerManager.Models;
     using GalaSoft.MvvmLight;
     using System;
+    using System.Linq;
+    using System.Collections.ObjectModel;
+    using CustomerManager.Utils;
 
     public class CustomerVM : ViewModelBase
     {
@@ -10,6 +13,7 @@
         private string firstName;
         private string lastName;
         private DateTime birthday;
+        private ObservableCollection<EmailAddressVM> emailAddresses;
 
         public CustomerVM()
         {
@@ -71,6 +75,19 @@
             }
         }
 
+        public ObservableCollection<EmailAddressVM> EmailAddresses
+        {
+            get
+            {
+                return this.emailAddresses;
+            }
+
+            private set
+            {
+                this.Set(() => this.EmailAddresses, ref this.emailAddresses, value);
+            }
+        }
+
         public static CustomerVM FromModel(CustomerM model)
         {
             return new CustomerVM()
@@ -79,6 +96,9 @@
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Birthday = model.Birthday,
+                EmailAddresses = model.EmailAddresses
+                    .Select(x => EmailAddressVM.FromModel(x))
+                    .ToObservableCollection(),
             };
         }
 
@@ -90,6 +110,9 @@
                 FirstName = this.firstName,
                 LastName = this.LastName,
                 Birthday = this.Birthday,
+                EmailAddresses = this.EmailAddresses
+                    .Select(x => x.ToModel())
+                    .ToList(),
             };
         }
 

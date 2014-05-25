@@ -71,7 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AddressTypeM.cs" />
     <Compile Include="Models\CustomerM.cs" />
+    <Compile Include="Models\EmailAddressM.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ICustomerService.cs" />
@@ -79,7 +81,10 @@
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Controllers\CustomerC.cs" />
+    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="ViewModels\AddressTypeVM.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
+    <Compile Include="ViewModels\EmailAddressVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\CustomerEditV.xaml.cs">
