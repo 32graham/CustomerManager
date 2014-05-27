@@ -77,6 +77,10 @@
       <Project>{3d47d610-3926-42e8-9e93-dc122dde372a}</Project>
       <Name>CustomerManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{35b46b2c-6ff6-470e-8ff5-e32cd1928612}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,18 +1,31 @@
-﻿using CustomerManager.Models;
-using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CustomerManager.ViewModels
+﻿namespace CustomerManager.ViewModels
 {
-    public class EmailAddressVM : ViewModelBase
+    using CustomerManager.Models;
+    using Framework;
+    using MvvmValidation;
+    using System;
+    using System.Text.RegularExpressions;
+    using CustomerManager.Utils;
+
+
+    public class EmailAddressVM : ValidatableViewModelBase
     {
         private Guid id;
         private AddressTypeVM addressType;
         private string address;
+
+        public EmailAddressVM()
+        {
+            this.Validator.AddRequiredRule(() => this.AddressType, "Address type is required");
+            this.Validator.AddRequiredRule(() => this.Address, "Email address is required");
+            this.Validator.AddRule(
+                () => this.Address,
+                () => RuleResult.Assert(
+                    CannedRegex.EmailAddress.Match(this.Address).Success,
+                    "Email address is not formatted correctly"));
+
+            this.Validator.ValidateAll();
+        }
 
         public Guid Id
         {
@@ -37,6 +50,7 @@ namespace CustomerManager.ViewModels
             set
             {
                 this.Set(() => this.AddressType, ref this.addressType, value);
+                this.Validator.Validate(() => this.AddressType);
             }
         }
 
@@ -50,6 +64,7 @@ namespace CustomerManager.ViewModels
             set
             {
                 this.Set(() => this.Address, ref this.address, value);
+                this.Validator.Validate(() => this.Address);
             }
         }
 

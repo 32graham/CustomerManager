@@ -1,13 +1,14 @@
 ﻿namespace CustomerManager.ViewModels
 {
     using CustomerManager.Models;
-    using GalaSoft.MvvmLight;
     using System;
     using System.Linq;
     using System.Collections.ObjectModel;
     using CustomerManager.Utils;
+    using Framework;
+    using MvvmValidation;
 
-    public class CustomerVM : ViewModelBase
+    public class CustomerVM : ValidatableViewModelBase
     {
         private Guid id;
         private string firstName;
@@ -22,6 +23,16 @@
             this.lastName = string.Empty;
             this.birthday = DateTime.Now.AddYears(-25);
             this.EmailAddresses = new ObservableCollection<EmailAddressVM>();
+
+            this.Validator.AddRequiredRule(() => this.FirstName, "First name is required");
+            this.Validator.AddRequiredRule(() => this.LastName, "Last name is required");
+            this.Validator.AddRule(
+                () => this.Birthday,
+                () => RuleResult.Assert(
+                    this.Birthday.Between(DateTime.Now.AddYears(-150), DateTime.Now),
+                    "Birthday should not be over 150 years ago"));
+
+            this.Validator.ValidateAll();
         }
 
         public Guid Id
@@ -47,6 +58,7 @@
             set
             {
                 this.Set(() => this.FirstName, ref this.firstName, value);
+                this.Validator.Validate(() => this.FirstName);
             }
         }
 
@@ -60,6 +72,7 @@
             set
             {
                 this.Set(() => this.LastName, ref this.lastName, value);
+                this.Validator.Validate(() => this.LastName);
             }
         }
 
@@ -73,6 +86,7 @@
             set
             {
                 this.Set(() => this.Birthday, ref this.birthday, value);
+                this.Validator.Validate(() => this.Birthday);
             }
         }
 

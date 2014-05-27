@@ -1,10 +1,10 @@
 ﻿namespace CustomerManager.ViewModels
 {
     using CustomerManager.Models;
-using GalaSoft.MvvmLight;
-using System;
+    using Framework;
+    using System;
 
-    public class AddressTypeVM : ViewModelBase, IEquatable<AddressTypeVM>
+    public class AddressTypeVM : ValidatableViewModelBase, IEquatable<AddressTypeVM>
     {
         private Guid id;
         private string name;

@@ -35,18 +35,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight.Extras.WPF45">
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF45, Version=4.3.31.28649, Culture=neutral, PublicKeyToken=0e27b6f8be9b2ef7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.3.31.1\lib\net45\GalaSoft.MvvmLight.Extras.WPF45.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.WPF45">
+    <Reference Include="GalaSoft.MvvmLight.WPF45, Version=4.3.31.28649, Culture=neutral, PublicKeyToken=eabbf6a5f5af5004, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.3.31.1\lib\net45\GalaSoft.MvvmLight.WPF45.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmValidation, Version=2.0.2.0, Culture=neutral, PublicKeyToken=113792d2053ac461, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmValidation.2.0.2\lib\net40-client\MvvmValidation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -82,10 +89,10 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Controllers\CustomerC.cs" />
     <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\CannedRegex.cs" />
     <Compile Include="ViewModels\AddressTypeVM.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\EmailAddressVM.cs" />
-    <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\CustomerEditV.xaml.cs">
       <DependentUpon>CustomerEditV.xaml</DependentUpon>
@@ -175,7 +182,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{35b46b2c-6ff6-470e-8ff5-e32cd1928612}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -25,15 +25,15 @@
         <Label
             Content="First Name:" />
         <TextBox
-            Text="{Binding SelectedCustomer.FirstName}" />
+            Text="{Binding SelectedCustomer.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <Label
             Content="Last Name:" />
         <TextBox
-            Text="{Binding SelectedCustomer.LastName}" />
+            Text="{Binding SelectedCustomer.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <Label
             Content="Birthday:" />
         <TextBox
-            Text="{Binding SelectedCustomer.Birthday}" />
+            Text="{Binding SelectedCustomer.Birthday, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 
 </Page>

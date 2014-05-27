@@ -1,17 +1,16 @@
 ﻿namespace CustomerManager.Controllers
 {
     using CustomerManager.Services;
+    using CustomerManager.Utils;
     using CustomerManager.ViewModels;
-    using GalaSoft.MvvmLight;
+    using Framework;
     using GalaSoft.MvvmLight.Command;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Windows.Input;
-    using CustomerManager.Utils;
 
-    public class CustomerC : ViewModelBase
+    public class CustomerC : ValidatableViewModelBase
     {
         private ICustomerService customerService;
         private INavigationService navigationService;
@@ -28,25 +27,8 @@
             this.customerService = customerService;
             this.navigationService = navigationService;
 
-            this.LoadCustomers();
-            this.LoadAddressTypes();
-
-            this.NavigateToCustomerDetailCommand =
-                new RelayCommand<CustomerVM>(this.NavigateToCustomerDetail);
-            this.NavigateToCustomerEditCommand =
-                new RelayCommand<CustomerVM>(this.NavigateToCustomerEdit);
-            this.NavigateToCustomerListCommand =
-                new RelayCommand(this.NavigateToCustomerList);
-            this.DeleteCommand = new RelayCommand<CustomerVM>(this.Delete, this.CanDelete);
-            this.NavigateToEmailAddressDetailCommand =
-                new RelayCommand<EmailAddressVM>(this.NavigateToEmailAddressDetail);
-            this.NavigateToEmailAddressEditCommand =
-                new RelayCommand<EmailAddressVM>(this.NavigateToEmailAddressEdit);
-
-            this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
-            this.SaveCommand = new RelayCommand(this.Save);
-            this.DeleteEmailAddressCommand = new RelayCommand(this.DeleteEmailAddress);
-            this.AddNewEmailAddressCommand = new RelayCommand(this.AddNewEmailAddress);
+            LoadData();
+            SetupCommands();
         }
 
         public ICommand NavigateToCustomerDetailCommand { get; private set; }
@@ -257,14 +239,14 @@
         {
             try
             {
-                this.IsProcessing = true;
+                //this.IsProcessing = true;
 
                 var types = await this.customerService.ListAddressTypes();
                 this.addressTypes = types.ToObservableCollection();
             }
             finally
             {
-                this.IsProcessing = false;
+                //this.IsProcessing = false;
             }
         }
 
@@ -275,5 +257,32 @@
             this.SelectedEmailAddress = emailAddress;
             this.navigationService.NavigateToEmailAddressEdit();
         }
+
+        private void LoadData()
+        {
+            this.LoadCustomers();
+            this.LoadAddressTypes();
+        }
+
+        private void SetupCommands()
+        {
+            this.NavigateToCustomerDetailCommand =
+                new RelayCommand<CustomerVM>(this.NavigateToCustomerDetail);
+            this.NavigateToCustomerEditCommand =
+                new RelayCommand<CustomerVM>(this.NavigateToCustomerEdit);
+            this.NavigateToCustomerListCommand =
+                new RelayCommand(this.NavigateToCustomerList);
+            this.NavigateToEmailAddressDetailCommand =
+                new RelayCommand<EmailAddressVM>(this.NavigateToEmailAddressDetail);
+            this.NavigateToEmailAddressEditCommand =
+                new RelayCommand<EmailAddressVM>(this.NavigateToEmailAddressEdit);
+
+            this.DeleteCommand = new RelayCommand<CustomerVM>(this.Delete, this.CanDelete);
+            this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
+            this.SaveCommand = new RelayCommand(this.Save);
+            this.DeleteEmailAddressCommand = new RelayCommand(this.DeleteEmailAddress);
+            this.AddNewEmailAddressCommand = new RelayCommand(this.AddNewEmailAddress);
+        }
+
     }
 }

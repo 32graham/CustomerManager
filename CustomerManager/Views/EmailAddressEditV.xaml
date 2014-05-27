@@ -19,6 +19,6 @@
         <TextBox
             Height="23"
             TextWrapping="Wrap"
-            Text="{Binding SelectedEmailAddress.Address}" />
+            Text="{Binding SelectedEmailAddress.Address, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 </Page>
