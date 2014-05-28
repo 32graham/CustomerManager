@@ -49,14 +49,14 @@
             addressTypes.Add(
                 new AddressTypeVM
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("c68c6e84-721f-40ba-aaf9-3df723f8967a"),
                     Name = "Personal",
                 });
 
             addressTypes.Add(
                 new AddressTypeVM
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("a70c612a-75f9-435f-a6fb-729d85f1ef2c"),
                     Name = "Work",
                 });
         }

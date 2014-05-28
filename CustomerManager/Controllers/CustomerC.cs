@@ -179,13 +179,12 @@
             try
             {
                 this.IsProcessing = true;
+                this.navigationService.NavigateToCustomerList();
 
                 foreach (var customer in this.customers)
                 {
                     await this.customerService.Save(customer);
                 }
-
-                this.navigationService.NavigateToCustomerList();
             }
             finally
             {
@@ -198,12 +197,11 @@
             try
             {
                 this.IsProcessing = true;
+                this.navigationService.NavigateToCustomerList();
 
                 await this.customerService.Delete(customer);
                 this.SelectedCustomer = null;
                 this.Customers.Remove(customer);
-
-                this.navigationService.NavigateToCustomerList();
             }
             finally
             {
