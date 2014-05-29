@@ -1,15 +1,14 @@
-namespace CustomerManager.ViewModels
+namespace CustomerManager
 {
     using CustomerManager.Controllers;
     using CustomerManager.Services;
-    using CustomerManager.ViewModels;
     using CustomerManager.Views;
     using GalaSoft.MvvmLight.Ioc;
     using Microsoft.Practices.ServiceLocation;
 
-    public class ViewModelLocator
+    public class Locator
     {
-        public ViewModelLocator()
+        public Locator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 

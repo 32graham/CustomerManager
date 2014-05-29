@@ -2,11 +2,11 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="DataTemplates/EmailAddress.xaml" />
-        <ResourceDictionary Source="DataTemplates/Customer.xaml" />
+        <ResourceDictionary Source="Views/DataTemplates/EmailAddress.xaml" />
+        <ResourceDictionary Source="Views/DataTemplates/Customer.xaml" />
       </ResourceDictionary.MergedDictionaries>
-            <vm:ViewModelLocator
-                xmlns:vm="clr-namespace:CustomerManager.ViewModels"
+            <vm:Locator
+                xmlns:vm="clr-namespace:CustomerManager"
                 x:Key="Locator"
                 d:IsDataSource="True" />
         </ResourceDictionary>
