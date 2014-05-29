@@ -13,8 +13,8 @@
 
         public static bool Between(this DateTime value, DateTime date1, DateTime date2)
         {
-            return value >= date1 && value <= date2
-                || value <= date1 && value >= date2;
+            return (value >= date1 && value <= date2)
+                || (value <= date1 && value >= date2);
         }
 
         public static DateTime AddYears(this DateTime value, int? years)
@@ -101,11 +101,6 @@
                 seconds);
 
             return value.Between(start, end);
-        }
-
-        private static int WeeksToDays(int? weeks)
-        {
-            return weeks ?? 0 * 7;
         }
 
         public static bool Between(this DateTime? value, DateTime date1, DateTime date2)
@@ -196,6 +191,11 @@
             }
 
             return (DateTime)value;
+        }
+
+        private static int WeeksToDays(int? weeks)
+        {
+            return weeks ?? 0 * 7;
         }
     }
 }

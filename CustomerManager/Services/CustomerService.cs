@@ -43,17 +43,16 @@
                 this.customers = temp.Select(x => CustomerVM.FromModel(x)).ToList();
             }
 
-
             this.addressTypes = new List<AddressTypeVM>();
 
-            addressTypes.Add(
+            this.addressTypes.Add(
                 new AddressTypeVM
                 {
                     Id = Guid.Parse("c68c6e84-721f-40ba-aaf9-3df723f8967a"),
                     Name = "Personal",
                 });
 
-            addressTypes.Add(
+            this.addressTypes.Add(
                 new AddressTypeVM
                 {
                     Id = Guid.Parse("a70c612a-75f9-435f-a6fb-729d85f1ef2c"),
@@ -89,7 +88,7 @@
                 this.customers.Add(customer);
             }
 
-            await WriteToDisk();
+            await this.WriteToDisk();
         }
 
         public async Task Delete(CustomerVM customer)
@@ -101,7 +100,7 @@
                 this.customers.Remove(customerToRemove);
             }
 
-            await WriteToDisk();
+            await this.WriteToDisk();
         }
 
         public async Task WriteToDisk()

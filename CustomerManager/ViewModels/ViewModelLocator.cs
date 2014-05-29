@@ -1,4 +1,4 @@
-namespace CustomerManager.ViewModel
+namespace CustomerManager.ViewModels
 {
     using CustomerManager.Controllers;
     using CustomerManager.Services;

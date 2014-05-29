@@ -1,12 +1,10 @@
 ﻿namespace CustomerManager.ViewModels
 {
     using CustomerManager.Models;
-    using Framework;
     using MvvmValidation;
     using System;
     using System.Text.RegularExpressions;
     using CustomerManager.Utils;
-
 
     public class EmailAddressVM : ValidatableViewModelBase
     {

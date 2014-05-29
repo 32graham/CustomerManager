@@ -1,12 +1,11 @@
 ﻿namespace CustomerManager.ViewModels
 {
     using CustomerManager.Models;
-    using System;
-    using System.Linq;
-    using System.Collections.ObjectModel;
     using CustomerManager.Utils;
-    using Framework;
     using MvvmValidation;
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
 
     public class CustomerVM : ValidatableViewModelBase
     {

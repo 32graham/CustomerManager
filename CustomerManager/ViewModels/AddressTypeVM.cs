@@ -1,7 +1,7 @@
 ﻿namespace CustomerManager.ViewModels
 {
     using CustomerManager.Models;
-    using Framework;
+    using CustomerManager.Utils;
     using System;
 
     public class AddressTypeVM : ValidatableViewModelBase, IEquatable<AddressTypeVM>

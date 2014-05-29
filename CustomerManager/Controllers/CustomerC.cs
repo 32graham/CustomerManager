@@ -3,7 +3,6 @@
     using CustomerManager.Services;
     using CustomerManager.Utils;
     using CustomerManager.ViewModels;
-    using Framework;
     using GalaSoft.MvvmLight.Command;
     using System;
     using System.Collections.ObjectModel;
@@ -27,8 +26,8 @@
             this.customerService = customerService;
             this.navigationService = navigationService;
 
-            LoadData();
-            SetupCommands();
+            this.LoadData();
+            this.SetupCommands();
         }
 
         public ICommand NavigateToCustomerDetailCommand { get; private set; }
@@ -235,17 +234,8 @@
 
         private async void LoadAddressTypes()
         {
-            try
-            {
-                //this.IsProcessing = true;
-
-                var types = await this.customerService.ListAddressTypes();
-                this.addressTypes = types.ToObservableCollection();
-            }
-            finally
-            {
-                //this.IsProcessing = false;
-            }
+            var types = await this.customerService.ListAddressTypes();
+            this.addressTypes = types.ToObservableCollection();
         }
 
         private void AddNewEmailAddress()
@@ -281,6 +271,5 @@
             this.DeleteEmailAddressCommand = new RelayCommand(this.DeleteEmailAddress);
             this.AddNewEmailAddressCommand = new RelayCommand(this.AddNewEmailAddress);
         }
-
     }
 }

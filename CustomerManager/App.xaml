@@ -5,7 +5,10 @@
         <ResourceDictionary Source="DataTemplates/EmailAddress.xaml" />
         <ResourceDictionary Source="DataTemplates/Customer.xaml" />
       </ResourceDictionary.MergedDictionaries>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:CustomerManager.ViewModel" x:Key="Locator" d:IsDataSource="True" />
-    </ResourceDictionary>
+            <vm:ViewModelLocator
+                xmlns:vm="clr-namespace:CustomerManager.ViewModels"
+                x:Key="Locator"
+                d:IsDataSource="True" />
+        </ResourceDictionary>
   </Application.Resources>
 </Application>
