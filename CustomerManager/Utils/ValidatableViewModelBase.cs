@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MvvmLight = GalaSoft.MvvmLight;
-using MvvmValidation;
-
-namespace CustomerManager.Utils
+﻿namespace CustomerManager.Utils
 {
-    public class ValidatableViewModelBase : MvvmLight.ViewModelBase, IDataErrorInfo
+    using MvvmValidation;
+    using System.ComponentModel;
+    using GalaSoft.MvvmLight;
+
+    public class ValidatableViewModelBase : ViewModelBase, IDataErrorInfo
     {
         public ValidatableViewModelBase()
         {
