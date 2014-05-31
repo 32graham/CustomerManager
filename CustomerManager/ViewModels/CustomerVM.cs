@@ -49,7 +49,7 @@
 
             set
             {
-                this.SetAndValidate(() => this.FirstName, ref this.firstName, value);
+                this.Set(() => this.FirstName, ref this.firstName, value);
                 this.Validator.Validate(() => this.FirstName);
             }
         }
@@ -63,7 +63,8 @@
 
             set
             {
-                this.SetAndValidate(() => this.LastName, ref this.lastName, value);
+                this.Set(() => this.LastName, ref this.lastName, value);
+                this.Validator.Validate(() => this.LastName);
             }
         }
 
@@ -76,7 +77,8 @@
 
             set
             {
-                this.SetAndValidate(() => this.Birthday, ref this.birthday, value);
+                this.Set(() => this.Birthday, ref this.birthday, value);
+                this.Validator.Validate(() => this.Birthday);
             }
         }
 
