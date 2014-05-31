@@ -5,6 +5,7 @@
     using System;
     using System.Text.RegularExpressions;
     using CustomerManager.Utils;
+    using AutoMapper;
 
     public class EmailAddressVM : ValidatableViewModelBase
     {
@@ -68,22 +69,12 @@
 
         public static EmailAddressVM FromModel(EmailAddressM model)
         {
-            return new EmailAddressVM
-            {
-                Id = model.Id,
-                AddressType = AddressTypeVM.FromModel(model.AddressType),
-                Address = model.Address,
-            };
+            return Mapper.Map<EmailAddressVM>(model);
         }
 
         public EmailAddressM ToModel()
         {
-            return new EmailAddressM
-            {
-                Id = this.Id,
-                AddressType = this.AddressType.ToModel(),
-                Address = this.Address,
-            };
+            return Mapper.Map<EmailAddressM>(this);
         }
     }
 }

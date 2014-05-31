@@ -1,5 +1,6 @@
 ﻿namespace CustomerManager.ViewModels
 {
+    using AutoMapper;
     using CustomerManager.Models;
     using CustomerManager.Utils;
     using System;
@@ -37,20 +38,12 @@
 
         public static AddressTypeVM FromModel(AddressTypeM model)
         {
-            return new AddressTypeVM
-            {
-                Id = model.Id,
-                Name = model.Name,
-            };
+            return Mapper.Map<AddressTypeVM>(model);
         }
 
         public AddressTypeM ToModel()
         {
-            return new AddressTypeM
-            {
-                Id = this.Id,
-                Name = this.Name,
-            };
+            return Mapper.Map<AddressTypeM>(this);
         }
 
         public bool Equals(AddressTypeVM other)
