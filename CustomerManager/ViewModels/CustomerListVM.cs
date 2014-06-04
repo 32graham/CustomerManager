@@ -1,8 +1,9 @@
-﻿namespace CustomerManager.Controllers
+﻿namespace CustomerManager.ViewModels
 {
+    using CustomerManager.Models;
     using CustomerManager.Services;
     using CustomerManager.Utils;
-    using CustomerManager.ViewModels;
+    using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
     using System;
     using System.Collections.ObjectModel;
@@ -10,17 +11,17 @@
     using System.Threading;
     using System.Windows.Input;
 
-    public class CustomerC : ValidatableViewModelBase
+    public class CustomerListVM : ViewModelBase
     {
         private ICustomerService customerService;
         private INavigationService navigationService;
-        private ObservableCollection<CustomerVM> customers;
-        private ObservableCollection<AddressTypeVM> addressTypes;
-        private CustomerVM selectedCustomer;
-        private EmailAddressVM selectedEmailAddress;
+        private ObservableCollection<CustomerM> customers;
+        private ObservableCollection<AddressTypeM> addressTypes;
+        private CustomerM selectedCustomer;
+        private EmailAddressM selectedEmailAddress;
         private int processCount;
 
-        public CustomerC(
+        public CustomerListVM(
             ICustomerService customerService,
             INavigationService navigationService)
         {
@@ -51,7 +52,7 @@
 
         public ICommand AddNewEmailAddressCommand { get; private set; }
 
-        public ObservableCollection<CustomerVM> Customers
+        public ObservableCollection<CustomerM> Customers
         {
             get
             {
@@ -64,7 +65,7 @@
             }
         }
 
-        public ObservableCollection<AddressTypeVM> AddressTypes
+        public ObservableCollection<AddressTypeM> AddressTypes
         {
             get
             {
@@ -77,7 +78,7 @@
             }
         }
 
-        public CustomerVM SelectedCustomer
+        public CustomerM SelectedCustomer
         {
             get
             {
@@ -90,7 +91,7 @@
             }
         }
 
-        public EmailAddressVM SelectedEmailAddress
+        public EmailAddressM SelectedEmailAddress
         {
             get
             {
@@ -111,7 +112,7 @@
             }
         }
 
-        private void NavigateToCustomerDetail(CustomerVM customer)
+        private void NavigateToCustomerDetail(CustomerM customer)
         {
             if (customer == null)
             {
@@ -124,7 +125,7 @@
 
         private void AddNewCustomer()
         {
-            var customer = new CustomerVM();
+            var customer = new CustomerM();
             this.customers.Add(customer);
             this.SelectedCustomer = customer;
             this.navigationService.NavigateToCustomerEdit();
@@ -147,7 +148,7 @@
                         this.SelectedCustomer.EmailAddresses.FirstOrDefault();
                 }
 
-                this.Customers = new ObservableCollection<CustomerVM>(list);
+                this.Customers = new ObservableCollection<CustomerM>(list);
             }
             finally
             {
@@ -156,7 +157,7 @@
             }
         }
 
-        private void NavigateToCustomerEdit(CustomerVM customer)
+        private void NavigateToCustomerEdit(CustomerM customer)
         {
             if (customer == null)
             {
@@ -193,7 +194,7 @@
             }
         }
 
-        private async void Delete(CustomerVM customer)
+        private async void Delete(CustomerM customer)
         {
             try
             {
@@ -213,18 +214,18 @@
             }
         }
 
-        private bool CanDelete(CustomerVM customer)
+        private bool CanDelete(CustomerM customer)
         {
             return customer != null;
         }
 
-        private void NavigateToEmailAddressDetail(EmailAddressVM emailAddress)
+        private void NavigateToEmailAddressDetail(EmailAddressM emailAddress)
         {
             this.SelectedEmailAddress = emailAddress;
             this.navigationService.NavigateToEmailAddressDetail();
         }
 
-        private void DeleteEmailAddress(EmailAddressVM emailAddress)
+        private void DeleteEmailAddress(EmailAddressM emailAddress)
         {
             if (emailAddress == null)
             {
@@ -236,7 +237,7 @@
             this.navigationService.NavigateToCustomerList();
         }
 
-        private void NavigateToEmailAddressEdit(EmailAddressVM emailAddress)
+        private void NavigateToEmailAddressEdit(EmailAddressM emailAddress)
         {
             this.SelectedEmailAddress = emailAddress;
             this.navigationService.NavigateToEmailAddressEdit();
@@ -250,7 +251,7 @@
 
         private void AddNewEmailAddress()
         {
-            var emailAddress = new EmailAddressVM();
+            var emailAddress = new EmailAddressM();
             this.SelectedCustomer.EmailAddresses.Add(emailAddress);
             this.SelectedEmailAddress = emailAddress;
             this.navigationService.NavigateToEmailAddressEdit();
@@ -265,21 +266,21 @@
         private void SetupCommands()
         {
             this.NavigateToCustomerDetailCommand =
-                new RelayCommand<CustomerVM>(this.NavigateToCustomerDetail);
+                new RelayCommand<CustomerM>(this.NavigateToCustomerDetail);
             this.NavigateToCustomerEditCommand =
-                new RelayCommand<CustomerVM>(this.NavigateToCustomerEdit);
+                new RelayCommand<CustomerM>(this.NavigateToCustomerEdit);
             this.NavigateToCustomerListCommand =
                 new RelayCommand(this.NavigateToCustomerList);
             this.NavigateToEmailAddressDetailCommand =
-                new RelayCommand<EmailAddressVM>(this.NavigateToEmailAddressDetail);
+                new RelayCommand<EmailAddressM>(this.NavigateToEmailAddressDetail);
             this.NavigateToEmailAddressEditCommand =
-                new RelayCommand<EmailAddressVM>(this.NavigateToEmailAddressEdit);
+                new RelayCommand<EmailAddressM>(this.NavigateToEmailAddressEdit);
 
-            this.DeleteCommand = new RelayCommand<CustomerVM>(this.Delete, this.CanDelete);
+            this.DeleteCommand = new RelayCommand<CustomerM>(this.Delete, this.CanDelete);
             this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
             this.SaveCommand = new RelayCommand(this.Save);
-            this.DeleteEmailAddressCommand = new RelayCommand<EmailAddressVM>
-                (this.DeleteEmailAddress);
+            this.DeleteEmailAddressCommand =
+                new RelayCommand<EmailAddressM>(this.DeleteEmailAddress);
             this.AddNewEmailAddressCommand = new RelayCommand(this.AddNewEmailAddress);
         }
     }

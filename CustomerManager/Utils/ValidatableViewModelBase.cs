@@ -1,17 +1,23 @@
 ﻿namespace CustomerManager.Utils
 {
+    using GalaSoft.MvvmLight;
     using MvvmValidation;
     using System.ComponentModel;
-    using GalaSoft.MvvmLight;
-    using System.Linq.Expressions;
-    using System;
 
-    public class ValidatableViewModelBase : ViewModelBase, IDataErrorInfo
+    public class ModelBase : ObservableObject, IDataErrorInfo
     {
-        public ValidatableViewModelBase()
+        public ModelBase()
         {
             this.Validator = new ValidationHelper();
-            this.DataErrorInfoAdapter = new DataErrorInfoAdapter(Validator);
+            this.DataErrorInfoAdapter = new DataErrorInfoAdapter(this.Validator);
+        }
+
+        public string Error
+        {
+            get
+            {
+                return DataErrorInfoAdapter.Error;
+            }
         }
 
         protected ValidationHelper Validator { get; private set; }
@@ -20,12 +26,10 @@
 
         public string this[string columnName]
         {
-            get { return DataErrorInfoAdapter[columnName]; }
-        }
-
-        public string Error
-        {
-            get { return DataErrorInfoAdapter.Error; }
+            get
+            {
+                return DataErrorInfoAdapter[columnName];
+            }
         }
     }
 }

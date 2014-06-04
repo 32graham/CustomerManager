@@ -8,7 +8,7 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     Title="Email Address"
-    DataContext="{Binding CustomerListC, Mode=OneWay, Source={StaticResource Locator}}">
+    DataContext="{Binding CustomerListVM, Mode=OneWay, Source={StaticResource Locator}}">
 
     <Page.Resources>
         <ResourceDictionary>

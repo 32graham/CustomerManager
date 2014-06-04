@@ -10,7 +10,7 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     Title="Customer List"
-    DataContext="{Binding CustomerListC, Source={StaticResource Locator}}">
+    DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}">
 
     <Page.Resources>
         <ResourceDictionary>

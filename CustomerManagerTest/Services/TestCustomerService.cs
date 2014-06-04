@@ -1,5 +1,6 @@
 namespace CustomerManagerTest.Services
 {
+    using CustomerManager.Models;
     using CustomerManager.Services;
     using CustomerManager.ViewModels;
     using System;
@@ -10,30 +11,30 @@ namespace CustomerManagerTest.Services
 
     public class TestCustomerService : ICustomerService
     {
-        private List<CustomerVM> customers;
+        private List<CustomerM> customers;
 
-        public async Task<IEnumerable<CustomerVM>> List()
+        public async Task<IEnumerable<CustomerM>> List()
         {
-            this.customers = new List<CustomerVM>();
+            this.customers = new List<CustomerM>();
             var addressTypes = await this.ListAddressTypes();
 
-            var josh = new CustomerVM
+            var josh = new CustomerM
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Josh",
                 LastName = "Graham",
                 Birthday = new DateTime(year: 1988, month: 1, day: 12),
-                EmailAddresses = new ObservableCollection<EmailAddressVM>
+                EmailAddresses = new ObservableCollection<EmailAddressM>
                 (
-                    new EmailAddressVM[]
+                    new EmailAddressM[]
                     {    
-                        new EmailAddressVM
+                        new EmailAddressM
                         {
                             Address = "graham.josh@gmail.com",
                             AddressType = addressTypes.First(),
                             Id = Guid.NewGuid(),
                         },
-                        new EmailAddressVM
+                        new EmailAddressM
                         {
                             Address = "jgraham@cusi.com",
                             AddressType = addressTypes.Last(),
@@ -43,7 +44,7 @@ namespace CustomerManagerTest.Services
                 )
             };
 
-            var brandy = new CustomerVM
+            var brandy = new CustomerM
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Brandy",
@@ -51,7 +52,7 @@ namespace CustomerManagerTest.Services
                 Birthday = new DateTime(year: 1988, month: 9, day: 24),
             };
 
-            var fred = new CustomerVM
+            var fred = new CustomerM
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Fred",
@@ -59,7 +60,7 @@ namespace CustomerManagerTest.Services
                 Birthday = new DateTime(year: 100, month: 3, day: 12)
             };
 
-            var wilma = new CustomerVM
+            var wilma = new CustomerM
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Wilma",
@@ -75,12 +76,12 @@ namespace CustomerManagerTest.Services
             return this.customers;
         }
 
-        public async Task<CustomerVM> Get(Guid id)
+        public async Task<CustomerM> Get(Guid id)
         {
             return this.customers.First(x => x.Id == id);
         }
 
-        public async Task Save(CustomerVM customer)
+        public async Task Save(CustomerM customer)
         {
             var existingCustomer = this.customers.FirstOrDefault(x => x.Id == customer.Id);
             if (existingCustomer != null)
@@ -94,25 +95,25 @@ namespace CustomerManagerTest.Services
             }
         }
 
-        public async Task Delete(CustomerVM customer)
+        public async Task Delete(CustomerM customer)
         {
             var customerToRemove = this.customers.First(x => x.Id == customer.Id);
             this.customers.Remove(customerToRemove);
         }
 
-        public async Task<IEnumerable<AddressTypeVM>> ListAddressTypes()
+        public async Task<IEnumerable<AddressTypeM>> ListAddressTypes()
         {
-            var addressTypes = new List<AddressTypeVM>();
+            var addressTypes = new List<AddressTypeM>();
 
             addressTypes.Add(
-                new AddressTypeVM
+                new AddressTypeM
                 {
                     Id = Guid.NewGuid(),
                     Name = "Personal",
                 });
 
             addressTypes.Add(
-                new AddressTypeVM
+                new AddressTypeM
                 {
                     Id = Guid.NewGuid(),
                     Name = "Work",

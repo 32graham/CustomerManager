@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="300"
-    DataContext="{Binding CustomerListC, Source={StaticResource Locator}}"
+    DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}"
     Title="Edit Customer"
     Height="Auto"
     Width="Auto">

@@ -1,5 +1,7 @@
 ﻿namespace CustomerManager.Services
 {
+    using AutoMapper;
+    using CustomerManager.DTOs;
     using CustomerManager.Models;
     using CustomerManager.ViewModels;
     using System;
@@ -12,15 +14,15 @@
 
     public class CustomerService : ICustomerService
     {
-        private List<CustomerVM> customers;
-        private List<AddressTypeVM> addressTypes;
+        private List<CustomerM> customers;
+        private List<AddressTypeM> addressTypes;
         private JavaScriptSerializer serializer;
         private string dataFilePath;
 
         public CustomerService()
         {
             this.serializer = new JavaScriptSerializer();
-            this.customers = new List<CustomerVM>();
+            this.customers = new List<CustomerM>();
             this.dataFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             this.dataFilePath = Path.Combine(this.dataFilePath, @"customers.json");
 
@@ -32,41 +34,41 @@
 
             var fileContents = string.Join(string.Empty, File.ReadAllLines(this.dataFilePath));
 
-            var temp = this.serializer.Deserialize<CustomerM[]>(fileContents);
+            var dtos = this.serializer.Deserialize<CustomerDTO[]>(fileContents);
 
-            if (temp == null)
+            if (dtos == null)
             {
-                this.customers = new List<CustomerVM>();
+                this.customers = new List<CustomerM>();
             }
             else
             {
-                this.customers = temp.Select(x => CustomerVM.FromModel(x)).ToList();
+                this.customers = Mapper.Map<IEnumerable<CustomerM>>(dtos).ToList();
             }
 
-            this.addressTypes = new List<AddressTypeVM>();
+            this.addressTypes = new List<AddressTypeM>();
 
             this.addressTypes.Add(
-                new AddressTypeVM
+                new AddressTypeM
                 {
                     Id = Guid.Parse("c68c6e84-721f-40ba-aaf9-3df723f8967a"),
                     Name = "Personal",
                 });
 
             this.addressTypes.Add(
-                new AddressTypeVM
+                new AddressTypeM
                 {
                     Id = Guid.Parse("a70c612a-75f9-435f-a6fb-729d85f1ef2c"),
                     Name = "Work",
                 });
         }
 
-        public async Task<IEnumerable<CustomerVM>> List()
+        public async Task<IEnumerable<CustomerM>> List()
         {
             await Task.Delay(1000);
             return this.customers;
         }
 
-        public async Task<CustomerVM> Get(Guid id)
+        public async Task<CustomerM> Get(Guid id)
         {
             await Task.Delay(500);
             return this.customers
@@ -74,7 +76,7 @@
                 .FirstOrDefault();
         }
 
-        public async Task Save(CustomerVM customer)
+        public async Task Save(CustomerM customer)
         {
             var existingCustomer = await this.Get(customer.Id);
 
@@ -91,7 +93,7 @@
             await this.WriteToDisk();
         }
 
-        public async Task Delete(CustomerVM customer)
+        public async Task Delete(CustomerM customer)
         {
             var customerToRemove = await this.Get(customer.Id);
 
@@ -105,13 +107,14 @@
 
         public async Task WriteToDisk()
         {
-            var fileContents = this.serializer.Serialize(this.customers.Select(x => x.ToModel()));
+            var dtos = Mapper.Map<IEnumerable<CustomerDTO>>(this.customers);
+            var fileContents = this.serializer.Serialize(dtos);
             File.WriteAllText(this.dataFilePath, fileContents);
 
             await Task.Delay(500);
         }
 
-        public async Task<IEnumerable<AddressTypeVM>> ListAddressTypes()
+        public async Task<IEnumerable<AddressTypeM>> ListAddressTypes()
         {
             return this.addressTypes;
         }

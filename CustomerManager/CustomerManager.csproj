@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DTOs\AddressTypeDTO.cs" />
+    <Compile Include="DTOs\CustomerDTO.cs" />
+    <Compile Include="DTOs\EmailAddressDTO.cs" />
     <Compile Include="Models\AddressTypeM.cs" />
     <Compile Include="Models\CustomerM.cs" />
     <Compile Include="Models\EmailAddressM.cs" />
@@ -91,15 +94,12 @@
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Controllers\CustomerC.cs" />
+    <Compile Include="ViewModels\CustomerListVM.cs" />
     <Compile Include="Utils\AutoMapperConfig.cs" />
     <Compile Include="Utils\ErrorMessages.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\CannedRegex.cs" />
     <Compile Include="Utils\ValidatableViewModelBase.cs" />
-    <Compile Include="ViewModels\AddressTypeVM.cs" />
-    <Compile Include="ViewModels\CustomerVM.cs" />
-    <Compile Include="ViewModels\EmailAddressVM.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Views\CustomerEditV.xaml.cs">
       <DependentUpon>CustomerEditV.xaml</DependentUpon>
@@ -191,6 +191,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,7 @@
 ﻿namespace CustomerManager.Utils
 {
     using AutoMapper;
+    using CustomerManager.DTOs;
     using CustomerManager.Models;
     using CustomerManager.ViewModels;
 
@@ -8,9 +9,9 @@
     {
         public static void Configure()
         {
-            Mapper.CreateMap<AddressTypeM, AddressTypeVM>().ReverseMap();
-            Mapper.CreateMap<EmailAddressM, EmailAddressVM>().ReverseMap();
-            Mapper.CreateMap<CustomerM, CustomerVM>().ReverseMap();
+            Mapper.CreateMap<AddressTypeDTO, AddressTypeM>().ReverseMap();
+            Mapper.CreateMap<EmailAddressDTO, EmailAddressM>().ReverseMap();
+            Mapper.CreateMap<CustomerDTO, CustomerM>().ReverseMap();
         }
     }
 }

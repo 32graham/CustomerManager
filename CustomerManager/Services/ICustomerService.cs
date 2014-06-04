@@ -1,20 +1,20 @@
 ﻿namespace CustomerManager.Services
 {
-    using CustomerManager.ViewModels;
+    using CustomerManager.Models;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface ICustomerService
     {
-        Task<IEnumerable<CustomerVM>> List();
+        Task<IEnumerable<CustomerM>> List();
 
-        Task<CustomerVM> Get(Guid id);
+        Task<CustomerM> Get(Guid id);
 
-        Task Save(CustomerVM customer);
+        Task Save(CustomerM customer);
 
-        Task Delete(CustomerVM customer);
+        Task Delete(CustomerM customer);
 
-        Task<IEnumerable<AddressTypeVM>> ListAddressTypes();
+        Task<IEnumerable<AddressTypeM>> ListAddressTypes();
     }
 }

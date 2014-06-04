@@ -5,7 +5,7 @@
     Title="MainWindow"
     Height="350"
     Width="520"
-    DataContext="{Binding CustomerListC, Source={StaticResource Locator}}">
+    DataContext="{Binding CustomerListVM, Source={StaticResource Locator}}">
 
     <Window.Resources>
         <ResourceDictionary>
