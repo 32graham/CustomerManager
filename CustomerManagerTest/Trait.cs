@@ -4,7 +4,7 @@
     {
         Unit,
         Integration,
-        Service,
-        Customer,
+        AccessesDatabase,
+        AccessesInternet,
     }
 }

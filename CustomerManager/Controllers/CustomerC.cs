@@ -7,6 +7,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading;
     using System.Windows.Input;
 
     public class CustomerC : ValidatableViewModelBase
@@ -17,7 +18,7 @@
         private ObservableCollection<AddressTypeVM> addressTypes;
         private CustomerVM selectedCustomer;
         private EmailAddressVM selectedEmailAddress;
-        private bool isProcessing;
+        private int processCount;
 
         public CustomerC(
             ICustomerService customerService,
@@ -106,12 +107,7 @@
         {
             get
             {
-                return this.isProcessing;
-            }
-
-            private set
-            {
-                this.Set(() => this.IsProcessing, ref this.isProcessing, value);
+                return this.processCount > 0;
             }
         }
 
@@ -138,7 +134,9 @@
         {
             try
             {
-                this.IsProcessing = true;
+                Interlocked.Increment(ref this.processCount);
+                this.RaisePropertyChanged(() => this.IsProcessing);
+
                 var list = await this.customerService.List();
 
                 this.SelectedCustomer = list.FirstOrDefault();
@@ -153,7 +151,8 @@
             }
             finally
             {
-                this.IsProcessing = false;
+                Interlocked.Decrement(ref this.processCount);
+                this.RaisePropertyChanged(() => this.IsProcessing);
             }
         }
 
@@ -177,7 +176,9 @@
         {
             try
             {
-                this.IsProcessing = true;
+                Interlocked.Increment(ref this.processCount);
+                this.RaisePropertyChanged(() => this.IsProcessing);
+
                 this.navigationService.NavigateToCustomerList();
 
                 foreach (var customer in this.customers)
@@ -187,7 +188,8 @@
             }
             finally
             {
-                this.IsProcessing = false;
+                Interlocked.Decrement(ref this.processCount);
+                this.RaisePropertyChanged(() => this.IsProcessing);
             }
         }
 
@@ -195,7 +197,9 @@
         {
             try
             {
-                this.IsProcessing = true;
+                Interlocked.Increment(ref this.processCount);
+                this.RaisePropertyChanged(() => this.IsProcessing);
+
                 this.navigationService.NavigateToCustomerList();
 
                 await this.customerService.Delete(customer);
@@ -204,7 +208,8 @@
             }
             finally
             {
-                this.IsProcessing = false;
+                Interlocked.Decrement(ref this.processCount);
+                this.RaisePropertyChanged(() => this.IsProcessing);
             }
         }
 
@@ -219,9 +224,14 @@
             this.navigationService.NavigateToEmailAddressDetail();
         }
 
-        private void DeleteEmailAddress()
+        private void DeleteEmailAddress(EmailAddressVM emailAddress)
         {
-            this.SelectedCustomer.EmailAddresses.Remove(this.SelectedEmailAddress);
+            if (emailAddress == null)
+            {
+                throw new ArgumentNullException("emailAddress");
+            }
+
+            this.SelectedCustomer.EmailAddresses.Remove(emailAddress);
             this.SelectedEmailAddress = null;
             this.navigationService.NavigateToCustomerList();
         }
@@ -235,7 +245,7 @@
         private async void LoadAddressTypes()
         {
             var types = await this.customerService.ListAddressTypes();
-            this.addressTypes = types.ToObservableCollection();
+            this.AddressTypes = types.ToObservableCollection();
         }
 
         private void AddNewEmailAddress()
@@ -268,7 +278,8 @@
             this.DeleteCommand = new RelayCommand<CustomerVM>(this.Delete, this.CanDelete);
             this.AddNewCustomerCommand = new RelayCommand(this.AddNewCustomer);
             this.SaveCommand = new RelayCommand(this.Save);
-            this.DeleteEmailAddressCommand = new RelayCommand(this.DeleteEmailAddress);
+            this.DeleteEmailAddressCommand = new RelayCommand<EmailAddressVM>
+                (this.DeleteEmailAddress);
             this.AddNewEmailAddressCommand = new RelayCommand(this.AddNewEmailAddress);
         }
     }

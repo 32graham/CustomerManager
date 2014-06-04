@@ -4,6 +4,7 @@ namespace CustomerManagerTest.Services
     using CustomerManager.ViewModels;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace CustomerManagerTest.Services
         public async Task<IEnumerable<CustomerVM>> List()
         {
             this.customers = new List<CustomerVM>();
+            var addressTypes = await this.ListAddressTypes();
 
             var josh = new CustomerVM
             {
@@ -21,6 +23,24 @@ namespace CustomerManagerTest.Services
                 FirstName = "Josh",
                 LastName = "Graham",
                 Birthday = new DateTime(year: 1988, month: 1, day: 12),
+                EmailAddresses = new ObservableCollection<EmailAddressVM>
+                (
+                    new EmailAddressVM[]
+                    {    
+                        new EmailAddressVM
+                        {
+                            Address = "graham.josh@gmail.com",
+                            AddressType = addressTypes.First(),
+                            Id = Guid.NewGuid(),
+                        },
+                        new EmailAddressVM
+                        {
+                            Address = "jgraham@cusi.com",
+                            AddressType = addressTypes.Last(),
+                            Id = Guid.NewGuid(),
+                        },
+                    }
+                )
             };
 
             var brandy = new CustomerVM

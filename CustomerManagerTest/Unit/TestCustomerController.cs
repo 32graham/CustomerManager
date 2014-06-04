@@ -106,7 +106,45 @@
         [TestTraits(Trait.Unit)]
         public void ShouldRemoveCustomerOnDeleteCommand()
         {
-            this.controller.DeleteCommand.Execute(null);
+            var customerToDelete = this.controller.Customers.First();
+            this.controller.DeleteCommand.Execute(customerToDelete);
+            Assert.IsFalse(this.controller.Customers.Contains(customerToDelete));
+        }
+
+        [TestMethod]
+        [TestTraits(Trait.Unit)]
+        public void ShouldHaveAddressTypesAfterConstructor()
+        {
+            Assert.IsTrue(this.controller.AddressTypes.Count > 0);
+        }
+
+        [TestMethod]
+        [TestTraits(Trait.Unit)]
+        public void ShouldRemoveEmailAddressOnDeleteEmailAddressCommand()
+        {
+            var emailAddresses = this.controller.Customers.First().EmailAddresses;
+            var emailAddressToDelete = emailAddresses.First();
+            this.controller.DeleteEmailAddressCommand.Execute(emailAddressToDelete);
+            Assert.IsFalse(emailAddresses.Contains(emailAddressToDelete));
+        }
+
+        [TestMethod]
+        [TestTraits(Trait.Unit)]
+        [ExpectedException(typeof(System.Reflection.TargetInvocationException))]
+        public void ShouldThrowExceptionWhenAttemptingToDeleteNullEmail()
+        {
+            this.controller.DeleteEmailAddressCommand.Execute(null);
+        }
+
+        [TestMethod]
+        [TestTraits(Trait.Unit)]
+        public void ShouldAddNewEmailAddressOnAddNewEmailAddressCommand()
+        {
+            var oldCount = this.controller.Customers.First().EmailAddresses.Count();
+            this.controller.AddNewEmailAddressCommand.Execute(null);
+            var newCount = this.controller.Customers.First().EmailAddresses.Count();
+
+            Assert.IsTrue(oldCount != newCount);
         }
     }
 }
